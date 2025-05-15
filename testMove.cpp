@@ -23,10 +23,8 @@ void TestMove::constructor_default()
    // Exercise
    Move m = Move();
    // Verify
-   assertEquals(m.source.getRow(), -1);
-   assertEquals(m.source.getCol(), -1);
-   assertEquals(m.dest.getRow(), -1);
-   assertEquals(m.dest.getCol(), -1);
+   assertUnit(m.source.colRow == 0x99);
+   assertUnit(m.dest.colRow == 0x99);
 }  // Teardown
 
  /*************************************
@@ -43,9 +41,9 @@ void TestMove::constructString_simple()
    // Exercise
    Move m(text);
    // Verify
-   assertEquals(m.source.colRow, 0x44);
-   assertEquals(m.dest.colRow, 0x45);
-   assertEquals(m.moveType, Move::MOVE);
+   assertUnit(m.source.colRow == 0x44);
+   assertUnit(m.dest.colRow == 0x45);
+   assertUnit(m.moveType == Move::MOVE);
 }  // Teardown
 
  /*************************************
@@ -63,9 +61,9 @@ void TestMove::read_simple()
    // Exercise
    Move m = textRhs;
    // Verify
-   assertEquals(m.source.colRow, 0x44);
-   assertEquals(m.dest.colRow, 0x45);
-   assertEquals(m.moveType, Move::MOVE);
+   assertUnit(m.source.colRow == 0x44);
+   assertUnit(m.dest.colRow == 0x45);
+   assertUnit(m.moveType == Move::MOVE);
 }  // Teardown
 
  /*************************************
@@ -83,10 +81,10 @@ void TestMove::read_capture()
    // Exercise
    Move m = textRhs;
    // Verify
-   assertEquals(m.source.colRow, 0x44);
-   assertEquals(m.dest.colRow, 0x35);
-   assertEquals(m.moveType, Move::MOVE);
-   assertEquals(m.capture, ROOK);
+   assertUnit(m.source.colRow == 0x44);
+   assertUnit(m.dest.colRow == 0x35);
+   assertUnit(m.moveType == Move::MOVE);
+   assertUnit(m.capture == ROOK);
 }  // Teardown
 
  /*************************************
@@ -103,9 +101,9 @@ void TestMove::read_enpassant()
    // Exercise
    Move m = textRhs;
    // Verify
-   assertEquals(m.source.colRow, 0x44);
-   assertEquals(m.dest.colRow, 0x55);
-   assertEquals(m.moveType, Move::ENPASSANT);
+   assertUnit(m.source.colRow == 0x44);
+   assertUnit(m.dest.colRow == 0x55);
+   assertUnit(m.moveType == Move::ENPASSANT);
 }  // Teardown
 
  /*************************************
@@ -122,9 +120,9 @@ void TestMove::read_castleKing()
    // Exercise
    Move m = textRhs;
    // Verify
-   assertEquals(m.source.colRow, 0x40);
-   assertEquals(m.dest.colRow, 0x60);
-   assertEquals(m.moveType, Move::CASTLE_KING);
+   assertUnit(m.source.colRow == 0x40);
+   assertUnit(m.dest.colRow == 0x60);
+   assertUnit(m.moveType == Move::CASTLE_KING);
 }  // Teardown
 
  /*************************************
@@ -141,9 +139,9 @@ void TestMove::read_castleQueen()
    // Exercise
    Move m = textRhs;
    // Verify
-   assertEquals(m.source.colRow, 0x40);
-   assertEquals(m.dest.colRow, 0x20);
-   assertEquals(m.moveType, Move::CASTLE_QUEEN);
+   assertUnit(m.source.colRow == 0x40);
+   assertUnit(m.dest.colRow == 0x20);
+   assertUnit(m.moveType == Move::CASTLE_QUEEN);
 }  // Teardown
 
  /*************************************
@@ -359,7 +357,7 @@ void TestMove::letterFromPieceType_space()
    // exercise
    type = m.letterFromPieceType(PieceType::SPACE);
    // Verify
-   assertEquals(type, ' ');
+   assertUnit(type == ' ');
 }  // Teardown
 
  /*************************************
@@ -374,7 +372,7 @@ void TestMove::letterFromPieceType_pawn()
    // exercise
    type = m.letterFromPieceType(PieceType::PAWN);
    // Verify
-   assertEquals(type, 'p');
+   assertUnit(type == 'p');
 }  // Teardown
 
  /*************************************
@@ -389,7 +387,7 @@ void TestMove::letterFromPieceType_bishop()
    // exercise
    type = m.letterFromPieceType(PieceType::BISHOP);
    // Verify
-   assertEquals(type, 'b');
+   assertUnit(type == 'b');
 }  // Teardown
 
  /*************************************
@@ -404,7 +402,7 @@ void TestMove::letterFromPieceType_knight()
    // exercise
    type = m.letterFromPieceType(PieceType::KNIGHT);
    // Verify
-   assertEquals(type, 'n');
+   assertUnit(type == 'n');
 }  // Teardown
 
  /*************************************
@@ -419,7 +417,7 @@ void TestMove::letterFromPieceType_rook()
    // exercise
    type = m.letterFromPieceType(PieceType::ROOK);
    // Verify
-   assertEquals(type, 'r');
+   assertUnit(type == 'r');
 }  // Teardown
 
  /*************************************
@@ -434,7 +432,7 @@ void TestMove::letterFromPieceType_queen()
    // exercise
    type = m.letterFromPieceType(PieceType::QUEEN);
    // Verify
-   assertEquals(type, 'q');
+   assertUnit(type == 'q');
 }  // Teardown
 
  /*************************************
@@ -449,7 +447,7 @@ void TestMove::letterFromPieceType_king()
    // exercise
    type = m.letterFromPieceType(PieceType::KING);
    // Verify
-   assertEquals(type, 'k');
+   assertUnit(type == 'k');
 }  // Teardown
 
  /*************************************
@@ -464,7 +462,7 @@ void TestMove::pieceTypeFromLetter_pawn()
    // Exercise
    piece = m.pieceTypeFromLetter('p');
    // Verify
-   assertEquals(piece, PAWN);
+   assertUnit(piece == PAWN);
 }  // Teardown
 
  /*************************************
@@ -479,7 +477,7 @@ void TestMove::pieceTypeFromLetter_bishop()
    // Exercise
    piece = m.pieceTypeFromLetter('b');
    // Verify
-   assertEquals(piece, BISHOP);
+   assertUnit(piece == BISHOP);
 }  // Teardown
 
  /*************************************
@@ -494,7 +492,7 @@ void TestMove::pieceTypeFromLetter_knight()
    // Exercise
    piece = m.pieceTypeFromLetter('n');
    // Verify
-   assertEquals(piece, KNIGHT);
+   assertUnit(piece == KNIGHT);
 }  // Teardown
 
  /*************************************
@@ -509,7 +507,7 @@ void TestMove::pieceTypeFromLetter_rook()
    // Exercise
    piece = m.pieceTypeFromLetter('r');
    // Verify
-   assertEquals(piece, ROOK);
+   assertUnit(piece == ROOK);
 }  // Teardown
 
  /*************************************
@@ -524,7 +522,7 @@ void TestMove::pieceTypeFromLetter_queen()
    // Exercise
    piece = m.pieceTypeFromLetter('q');
    // Verify
-   assertEquals(piece, QUEEN);
+   assertUnit(piece == QUEEN);
 }  // Teardown
 
  /*************************************
@@ -539,7 +537,7 @@ void TestMove::pieceTypeFromLetter_king()
    // Exercise
    piece = m.pieceTypeFromLetter('k');
    // Verify
-   assertEquals(piece, KING);
+   assertUnit(piece == KING);
 }  // Teardown
 
 
@@ -560,7 +558,7 @@ void TestMove::equal_not()
    // Exercise
    response = moveLhs == moveRhs;
    // Verify
-   assertEquals(response, false);
+   assertUnit(response == false);
 }  // Teardown
 
  /*************************************
@@ -580,7 +578,7 @@ void TestMove::equal_equals()
    // Exercise
    response = moveLhs == moveRhs;
    // Verify
-   assertEquals(response, true);
+   assertUnit(response == true);
 }  // Teardown
 
  /*************************************
@@ -648,4 +646,3 @@ void TestMove::lessthan_greaterthan()
    // Verify
    assertUnit(response == false);
 }  // Teardown
-
