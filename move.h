@@ -33,16 +33,25 @@ public:
 
    // constructor
    Move();
-   Move(const string & rhs) {}
-   bool operator<(const Move & rhs) const { return true; }
-   bool operator==(const Move& rhs) const { return true; }
-   void read(const string & rhs) {}
-   string getText() const { return std::string(""); }
+   Move(char* t) { this->parse(t); }
+
+   // operators
+   bool operator == (const Move& rhs) const {
+      return source.getLocation() == rhs.source.getLocation() &&
+         dest.getLocation() == rhs.dest.getLocation();
+   }
+   bool operator <  (const Move& rhs) const { return dest.getLocation() < rhs.dest.getLocation(); }
+   Move& operator = (char* t) { this->parse(t); return *this; }
+
+   // Methods
+   string getText();
 
 
 private:
-   char letterFromPieceType(PieceType pt)     const { return 'z'; }
-   PieceType pieceTypeFromLetter(char letter) const { return SPACE; }
+   void parse(char* t);
+   char* lettersFromPosition(Position& pos);
+   char letterFromPieceType(PieceType pt)     const;
+   PieceType pieceTypeFromLetter(char letter) const;
 
 
 
