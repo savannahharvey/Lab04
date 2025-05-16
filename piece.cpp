@@ -36,4 +36,3 @@ const Piece & Piece::operator = (const Piece & rhs)
 void Piece::getMoves(set <Move> & movesSet, const Board & board) const
 {
 }
-

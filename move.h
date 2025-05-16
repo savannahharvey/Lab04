@@ -46,6 +46,12 @@ public:
    // Methods
    string getText();
 
+   // Getters
+   const MoveType  & getMoveType() const { return moveType; }
+   const Position  & getSource()   const { return source;   }
+   const Position  & getDest()     const { return dest;     }
+   const PieceType & getCapture()  const { return capture;  }
+
 
 private:
    void parse(char* t);

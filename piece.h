@@ -51,8 +51,17 @@ public:
    friend TestBoard;
    
    // constructors and stuff
-   Piece(const Position & pos, bool isWhite = true)   {}
-   Piece(int c, int r, bool isWhite = true)           {}
+   Piece() : nMoves(0), fWhite(true), lastMove(0), position(nullptr) {}
+   Piece(const Position & pos, bool isWhite = true)
+   {
+      position.set(pos.getCol(), pos.getRow());
+      fWhite = isWhite;
+   }
+   Piece(int c, int r, bool isWhite = true)
+   {
+      position.set(c, r);
+      fWhite = isWhite;
+   }
    Piece(const Piece & piece)                         {}
    virtual ~Piece()                                   {}
    virtual const Piece& operator = (const Piece& rhs);

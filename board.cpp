@@ -41,20 +41,17 @@ void Board::reset(bool fFree)
          board[c][r] = nullptr;
 }
 
-// we really REALLY need to delete this.
-Space space(0,0);
-
 /***********************************************
 * BOARD : GET
 *         Get a piece from a given position.
 ***********************************************/
 const Piece& Board::operator [] (const Position& pos) const
 {
-   return space;
+   return *board[pos.getCol()][pos.getRow()];
 }
 Piece& Board::operator [] (const Position& pos)
 {
-   return space;
+   return *board[pos.getCol()][pos.getRow()];
 }
 
  /***********************************************
@@ -63,7 +60,27 @@ Piece& Board::operator [] (const Position& pos)
  ***********************************************/
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
+   ogstream gout;
+
+   // draw the checkerboard
+   gout.drawBoard();
+
+   // draw any selections
+   gout.drawHover(posHover);
+   gout.drawSelected(posSelect);
+
+   // draw the pieces
+   Knight knight(1, 0, true);
+   Knight knight1(6, 0, true);
+   Knight knight2(1, 7, false);
+   Knight knight3(6, 7, false);
    
+   knight.display(&gout);
+   knight1.display(&gout);
+   knight2.display(&gout);
+   knight3.display(&gout);
+   
+   gout.drawPossible(posSelect);
 }
 
 
@@ -104,11 +121,21 @@ void Board::assertBoard()
  *         Execute a move according to the contained instructions
  *   INPUT move The instructions of the move
  *********************************************/
-void Board::move(const Move & move)
-{  
-
+void Board::move(const Move& move)
+{
+   if (move.getMoveType() == Move::MOVE)
+   {
+      // board at destination has the same piece as the source
+      board[move.getDest().getCol()][move.getDest().getRow()] =
+      board[move.getSource().getCol()][move.getSource().getRow()];
+      // new space object...
+      Space* space = new Space(move.getSource().getCol(), move.getSource().getRow());
+      // board at source is a new space piece now
+      board[move.getSource().getCol()][move.getSource().getRow()] = space;
+      // add to how many moves made
+      numMoves += 1;
+   }
 }
-
 
 
 /**********************************************
