@@ -34,6 +34,11 @@ public:
    // constructor
    Move();
    Move(char* t) { this->parse(t); }
+   
+   // setters
+   void setSource(Position &pos) { this->source = pos; }
+   void setDest(Position &pos) { this->dest = pos; }
+   void setCapture(PieceType capture) {this->capture = capture; this->moveType = MOVE; }
 
    // operators
    bool operator == (const Move& rhs) const {

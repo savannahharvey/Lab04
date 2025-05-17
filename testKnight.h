@@ -10,6 +10,7 @@
 #pragma once
 
 #include "unitTest.h"
+#include "board.h"
 
 
 /***************************************************
@@ -37,4 +38,5 @@ private:
    void getMoves_free();
    void getMoves_end();
    void getType();
+   void clearBoard(BoardEmpty& board);
 };
