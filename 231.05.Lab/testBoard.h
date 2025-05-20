@@ -63,22 +63,22 @@ public:
       set_a1();
       set_h8();
       set_a8();
-      
+
       report("Board");
    }
 private:
    
    void createDummyBoard(Board & board);
    void construct_default();
-   void getCurrentMove_initial() {}
-   void getCurrentMove_second() {}
-   void getCurrentMove_middleWhite() {}
-   void getCurrentMove_middleBlack() {}
+   void getCurrentMove_initial();
+   void getCurrentMove_second();
+   void getCurrentMove_middleWhite();
+   void getCurrentMove_middleBlack();
    
-   void whiteTurn_initial() {}
-   void whiteTurn_second() {}
-   void whiteTurn_middleWhite() {}
-   void whiteTurn_middleBlack() {}
+   void whiteTurn_initial();
+   void whiteTurn_second();
+   void whiteTurn_middleWhite();
+   void whiteTurn_middleBlack();
 
    void move_pawnSimple();
    void move_pawnCapture();
@@ -98,11 +98,12 @@ private:
    void move_kingShortCastle();
    void move_kingLongCastle();
 
-   void fetch_a1() {}
-   void fetch_h8() {}
-   void fetch_a8() {}
-   void set_a1() {}
-   void set_h8() {}
-   void set_a8() {}
+   void fetch_a1();
+   void fetch_h8();
+   void fetch_a8();
+   void set_a1();
+   void set_h8();
+   void set_a8();
+
 };
 

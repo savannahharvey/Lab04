@@ -107,14 +107,22 @@ public:
    }
    void setRow(int r)
    {
+//      assert(r >= 0);
+//      assert(r <= 7);
       colRow += r;
    }
    void setCol(int c)
    {
+//      assert(c >= 0);
+//      assert(c <= 7);
       colRow = c * 16;
    }
    void set(int c, int r)
    {
+//      assert(c >= 0);
+//      assert(c <= 7);
+//      assert(r >= 0);
+//      assert(r <= 7);
       colRow = c * 16 + r;
    }
 
