@@ -132,6 +132,7 @@ void Board::move(const Move& move)
       // new space object...
       Space* space = new Space(move.getSource().getCol(), move.getSource().getRow());
       // board at source is a new space piece now
+      delete board[move.getSource().getCol()][move.getSource().getRow()];
       board[move.getSource().getCol()][move.getSource().getRow()] = space;
       // add to how many moves made
       numMoves += 1;
