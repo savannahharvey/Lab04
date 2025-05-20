@@ -56,6 +56,7 @@ public:
    //               Allowing for comparisions, copying, etc.
    Position(const Position& rhs) : colRow(rhs.colRow)  {}
    Position() : colRow(0x99) {}
+   
    bool isInvalid() const { return (getRow() == -1 || getCol() == -1) ? true : false; }
    bool isValid()   const { return (getRow() == -1 || getCol() == -1) ? false : true; }
    void setValid() {}
