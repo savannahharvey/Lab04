@@ -128,6 +128,7 @@ void Board::move(const Move& move)
       // board at destination has the same piece as the source
       board[move.getDest().getCol()][move.getDest().getRow()] =
       board[move.getSource().getCol()][move.getSource().getRow()];
+
       // new space object...
       Space* space = new Space(move.getSource().getCol(), move.getSource().getRow());
       // board at source is a new space piece now

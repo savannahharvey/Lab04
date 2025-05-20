@@ -184,6 +184,7 @@ PieceType Move::pieceTypeFromLetter(char letter) const
 string Move::getText()
 {
    char* text = new char[6];
+   text[0] = '\0';
    // get the first 4 characters for locations.
    char* sourceText = this->lettersFromPosition(source);
    char* destText = this->lettersFromPosition(dest);
