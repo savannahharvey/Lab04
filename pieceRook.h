@@ -1,10 +1,10 @@
 /***********************************************************************
  * Header File:
- *    BISHOP
+ *   ROOK
  * Author:
 *    <your name here>
  * Summary:
- *    The bishop class
+ *    The rook class
  ************************************************************************/
 
 #pragma once
@@ -12,16 +12,16 @@
 #include "piece.h"
 
  /***************************************************
-  * BISHOP
-  * The bishop
+  * ROOK
+  * The rook
   ***************************************************/
-class Bishop : public Piece
+class Rook : public Piece
 {
 public:
-   Bishop(const Position& pos, bool isWhite) : Piece(pos.getCol(), pos.getRow(), true) {}
-   Bishop(int c, int r, bool isWhite) : Piece(c, r, true) {}
-   ~Bishop() {}
-   PieceType getType()            const { return BISHOP; }
+   Rook(const Position& pos, bool isWhite) : Piece(pos.getCol(), pos.getRow(), true) {}
+   Rook(int c, int r, bool isWhite) : Piece(c, r, true) {}
+   ~Rook() {}
+   PieceType getType()            const { return ROOK; }
    void getMoves(set <Move>& moves, const Board& board) const;
    void display(ogstream* pgout)  const;
 };

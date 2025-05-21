@@ -125,6 +125,8 @@
     <ClInclude Include="piece.h" />
     <ClInclude Include="pieceBishop.h" />
     <ClInclude Include="pieceKnight.h" />
+    <ClInclude Include="pieceQueen.h" />
+    <ClInclude Include="pieceRook.h" />
     <ClInclude Include="pieceSpace.h" />
     <ClInclude Include="pieceType.h" />
     <ClInclude Include="test.h" />

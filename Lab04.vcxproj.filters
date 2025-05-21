@@ -146,6 +146,12 @@
     <ClInclude Include="pieceBishop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pieceQueen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pieceRook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

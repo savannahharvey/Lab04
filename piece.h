@@ -93,8 +93,8 @@ public:
       {
          Position posMove(position, deltas[i]);
 
-         posMove.setRow(position.getRow() + deltas[i].dRow);
-         posMove.setCol(position.getCol() + deltas[i].dCol);
+         //posMove.setRow(position.getRow() + deltas[i].dRow);
+         //posMove.setCol(position.getCol() + deltas[i].dCol);
 
          while (posMove.isValid() && (board[posMove].isWhite() != fWhite || board[posMove].getType() == SPACE))
          {
@@ -104,8 +104,15 @@ public:
             move.setDest(posMove);
 
             if (board[posMove].getType() != SPACE)
+            {
                move.setCapture(board[posMove].getType());
+               break;
+            }
+
             moves.insert(move);
+
+            posMove.setRow(posMove.getRow() + deltas[i].dRow);
+            posMove.setCol(posMove.getCol() + deltas[i].dCol);
          }
       }
 
