@@ -36,6 +36,7 @@ const Delta SUB_C = { 0, -1 };
 
 class PositionTest;
 class TestKnight;
+class TestKing;
 class TestBoard;
 class TestMove;
 
@@ -47,7 +48,11 @@ class Position
 {
    friend class PositionTest;
    friend class TestBishop;
+   friend class TestRook;
+   friend class TestQueen;
+   friend class TestKing;
    friend class TestKnight;
+   friend class TestPawn;
    friend class TestBoard;
    friend class TestMove;
 
