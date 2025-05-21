@@ -16,6 +16,7 @@
 
 class TestMove;
 class TestBoard;
+class TestBishop;
 class TestKnight;
 
 /***************************************************
@@ -29,6 +30,7 @@ public:
 
    friend TestMove;
    friend TestBoard;
+   friend TestBishop;
    friend TestKnight;
 
    // constructor

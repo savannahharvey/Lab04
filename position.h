@@ -46,6 +46,7 @@ class TestMove;
 class Position
 {
    friend class PositionTest;
+   friend class TestBishop;
    friend class TestKnight;
    friend class TestBoard;
    friend class TestMove;
@@ -192,7 +193,7 @@ public:
    // Delta:    The Position class can work with deltas, which are
    //           offsets from a given location. This helps pieces move
    //           on the chess board.
-   Position(const Position& rhs, const Delta& delta) : colRow(-1) {}
+   Position(const Position& rhs, const Delta& delta) : colRow(rhs.colRow) {}
    void adjustRow(int dRow) { setRow(dRow); }
    void adjustCol(int dCol) { setCol(dCol); }
    const Position& operator += (const Delta& rhs)
