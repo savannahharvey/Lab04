@@ -28,10 +28,12 @@ class Move
 public:
    enum MoveType { MOVE, ENPASSANT, CASTLE_KING, CASTLE_QUEEN, MOVE_ERROR };
 
-   friend TestMove;
-   friend TestBoard;
-   friend TestBishop;
-   friend TestKnight;
+   friend class TestBishop;
+   friend class TestRook;
+   friend class TestQueen;
+   friend class TestKing;
+   friend class TestKnight;
+   friend class TestPawn;
 
    // constructor
    Move();
