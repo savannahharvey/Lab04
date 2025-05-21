@@ -10,6 +10,7 @@
 
 #include "testMove.h"
 #include "move.h"
+#include "position.h"
 #include <cassert>
 
  /*************************************
