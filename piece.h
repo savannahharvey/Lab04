@@ -16,6 +16,7 @@
 #include "position.h"  // Because Position is a member variable
 #include "move.h"      // Because we return a set of Move
 #include "pieceType.h" // A piece type.
+#include "board.h"
 using std::set;
 
 // forward declaration because one of the Piece methods takes a Board
@@ -91,24 +92,18 @@ public:
       for (int i = 0; i < numDelta; i++)
       {
          Position posMove(position, deltas[i]);
-         posMove.setCol(delta[i].dCol /* * */);
-         int r = position.getRow() + deltas[i].dRow;
-         int c = position.getCol() + deltas[i].dCol;
-         while (r >= 0 && r < 8 && c >= 0 && c < 8 && board[r * 8 + c] == SPACE)
-         {
-            moves.insert(/*some kind of move object...*/r * 8 + c);
-            r += moves[i].row;
-            c += moves[i].col;
-         }
 
-         if (posMove.isValid() && (board[posMove].isWhite() != fWhite || board[posMove] == SPACE))
+         posMove.setRow(position.getRow() + deltas[i].dRow);
+         posMove.setCol(position.getCol() + deltas[i].dCol);
+
+         while (posMove.isValid() && (board[posMove].isWhite() != fWhite || board[posMove].getType() == SPACE))
          {
             Move move;
             Position posCopy = getPosition();
             move.setSource(posCopy);
             move.setDest(posMove);
-            // set to white's turn?...
-            if (board[posMove] != SPACE)
+
+            if (board[posMove].getType() != SPACE)
                move.setCapture(board[posMove].getType());
             moves.insert(move);
          }

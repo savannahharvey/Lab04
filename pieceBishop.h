@@ -18,7 +18,7 @@
 class Bishop : public Piece
 {
 public:
-   Bishop(const Position& pos, bool isWhite) : Piece(10, 10, true) {}
+   Bishop(const Position& pos, bool isWhite) : Piece(pos.getCol(), pos.getRow(), true) {}
    Bishop(int c, int r, bool isWhite) : Piece(c, r, true) {}
    ~Bishop() {}
    PieceType getType()            const { return BISHOP; }
