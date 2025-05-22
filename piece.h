@@ -57,13 +57,23 @@ public:
    {
       position.set(pos.getCol(), pos.getRow());
       fWhite = isWhite;
+      lastMove = 0;
+      nMoves = 0;
    }
    Piece(int c, int r, bool isWhite = true)
    {
       position.set(c, r);
       fWhite = isWhite;
+      lastMove = 0;
+      nMoves = 0;
    }
-   Piece(const Piece & piece)                         {}
+   Piece(const Piece& piece)
+   {
+      position.set(piece.position.getCol(), piece.position.getRow());
+      fWhite = piece.isWhite();
+      lastMove = 0;
+      nMoves = 0;
+   }
    virtual ~Piece()                                   {}
    virtual const Piece& operator = (const Piece& rhs);
 
@@ -91,26 +101,25 @@ public:
       set <Move> moves;
       for (int i = 0; i < numDelta; i++)
       {
-         Position posMove(position, deltas[i]);
+        // new Position that is the next possible move
+        Position posMove(position.getCol() + deltas[i].dCol,
+                         position.getRow() + deltas[i].dRow);
 
-         //posMove.setRow(position.getRow() + deltas[i].dRow);
-         //posMove.setCol(position.getCol() + deltas[i].dCol);
-
-         while (posMove.isValid() && (board[posMove].isWhite() != fWhite || board[posMove].getType() == SPACE))
+         while (posMove.isValid() &&
+               (board[posMove].isWhite() != fWhite ||
+                board[posMove].getType() == SPACE))
          {
+            // create a new possible move and attributes
             Move move;
-            Position posCopy = getPosition();
+            Position posCopy = getPosition(); // new source because it needs to be const
             move.setSource(posCopy);
             move.setDest(posMove);
+            move.setCapture(board[posMove].getType());
 
-            if (board[posMove].getType() != SPACE)
-            {
-               move.setCapture(board[posMove].getType());
-               break;
-            }
-
+            // insert into possible moves
             moves.insert(move);
 
+            // change posMove to the next delta position for the next loop
             posMove.setRow(posMove.getRow() + deltas[i].dRow);
             posMove.setCol(posMove.getCol() + deltas[i].dCol);
          }

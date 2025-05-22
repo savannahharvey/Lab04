@@ -24,8 +24,8 @@ const int OFFSET_BOARD = 50;   // boarder between the board and the edge of scre
  **********************************************/
 struct Delta
 {
-   int dRow;
    int dCol;
+   int dRow;
 };
 
 const Delta ADD_R = { 1,  0 };
@@ -99,7 +99,7 @@ public:
 
    // Row/Col : The position class can work with row/column,
    //           which are 0..7 and 0...7
-   Position(int c, int r) : colRow(0x99) {}
+   Position(int c, int r) : colRow(c * 16 + r) {}
    virtual int getCol() const
    {
       int col = (int)((colRow & 0xf0) >> 4);
@@ -114,22 +114,20 @@ public:
    }
    void setRow(int r)
    {
-//      assert(r >= 0);
-//      assert(r <= 7);
-      colRow += r;
+      if (r >= 0 && r < 8)
+         colRow = (colRow & 0xf0) | (r & 0x0f); // | concatenates 0x[a]0 with 0x0[b] to get 0x[a][b] i think...
+      else
+         colRow = -1;
    }
    void setCol(int c)
    {
-//      assert(c >= 0);
-//      assert(c <= 7);
-      colRow = c * 16;
+      if (c >= 0 && c < 8)
+         colRow = (colRow & 0x0f) | ((c & 0x0f) << 4);  // | concatenates 0x0[a] with 0x0[b] << 4 to get 0x[b][a] i think...
+      else
+         colRow = -1;
    }
    void set(int c, int r)
    {
-//      assert(c >= 0);
-//      assert(c <= 7);
-//      assert(r >= 0);
-//      assert(r <= 7);
       colRow = c * 16 + r;
    }
 

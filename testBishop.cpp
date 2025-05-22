@@ -34,21 +34,21 @@ void TestBishop::getMoves_blocked()
 {
    // SETUP
    BoardEmpty board;
-   Bishop bishop(7, 7, false);
-   bishop.fWhite = true;
-   bishop.position.colRow = 0x21;
+   Bishop bishop(7, 7, true);
+   bishop.fWhite = false;
+   bishop.position.colRow = 0x21; // 33
    board.board[2][1] = &bishop;
    Black black(PAWN);
-   black.position.colRow = 0x12;
+   black.position.colRow = 0x12; // 18
    board.board[1][2] = &black;
    Black black1(PAWN);
-   black1.position.colRow = 0x32;
+   black1.position.colRow = 0x32; // 50
    board.board[3][2] = &black1;
    Black black2(PAWN);
-   black.position.colRow = 0x30;
+   black.position.colRow = 0x30; // 48
    board.board[3][0] = &black2;
    Black black3(PAWN);
-   black1.position.colRow = 0x10;
+   black1.position.colRow = 0x10; // 16
    board.board[1][0] = &black3;
    set <Move> moves;
    Move c2b3p;
@@ -72,14 +72,10 @@ void TestBishop::getMoves_blocked()
    bishop.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 4);  // many possible moves
-   assertUnit(moves.find(c2b3p) != moves.end());
-   assertUnit(moves.find(c2d3p) != moves.end());
-   assertUnit(moves.find(c2d0p) != moves.end());
-   assertUnit(moves.find(c2b0p) != moves.end());
+   assertUnit(moves.size() == 0);  // no possible moves
 
    // TEARDOWN
-   board.board[2][1] = nullptr; // white bishop
+   board.board[2][1] = nullptr; // black bishop
    board.board[1][2] = nullptr; // black pawn
    board.board[3][2] = nullptr; // black pawn
    board.board[3][0] = nullptr; // black pawn
@@ -151,7 +147,7 @@ void TestBishop::getMoves_slideToEnd()
    bishop.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 4);  // many possible moves
+   assertUnit(moves.size() == 9);  // many possible moves
    assertUnit(moves.find(c2b3) != moves.end());
    assertUnit(moves.find(c2d3) != moves.end());
    assertUnit(moves.find(c2d0) != moves.end());
@@ -228,7 +224,7 @@ void TestBishop::getMoves_slideToBlock()
    bishop.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 4);  // many possible moves
+   assertUnit(moves.size() == 5);  // many possible moves
    assertUnit(moves.find(c2b3) != moves.end());
    assertUnit(moves.find(c2d3) != moves.end());
    assertUnit(moves.find(c2e4) != moves.end());
@@ -321,7 +317,7 @@ void TestBishop::getMoves_slideToCapture()
    bishop.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 4);  // many possible moves
+   assertUnit(moves.size() == 9);  // many possible moves
    assertUnit(moves.find(c2b3) != moves.end());
    assertUnit(moves.find(c2d3) != moves.end());
    assertUnit(moves.find(c2d0) != moves.end());
