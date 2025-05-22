@@ -62,6 +62,8 @@
 		43C50C7C2DDE63BA00763C88 /* pieceKing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pieceKing.cpp; sourceTree = "<group>"; };
 		43C50C7E2DDE6F0C00763C88 /* piecePawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = piecePawn.h; sourceTree = "<group>"; };
 		43C50C7F2DDE6F3F00763C88 /* piecePawn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = piecePawn.cpp; sourceTree = "<group>"; };
+		43C50C812DDE718B00763C88 /* pieceQueen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pieceQueen.h; sourceTree = "<group>"; };
+		43C50C822DDE718B00763C88 /* pieceRook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pieceRook.h; sourceTree = "<group>"; };
 		C1EE0D732B28F39600E5D6E1 /* Lab04 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab04; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EE0D7D2B28F3C500E5D6E1 /* chess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chess.cpp; sourceTree = "<group>"; };
 		C1EE0D7E2B28F3C500E5D6E1 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
@@ -124,6 +126,8 @@
 				43C50C6A2DDE5BB900763C88 /* testBishop.cpp */,
 				43C50C6B2DDE5BB900763C88 /* testKing.h */,
 				43C50C6C2DDE5BB900763C88 /* testKing.cpp */,
+				43C50C812DDE718B00763C88 /* pieceQueen.h */,
+				43C50C822DDE718B00763C88 /* pieceRook.h */,
 				43C50C6D2DDE5BB900763C88 /* testPawn.h */,
 				43C50C6E2DDE5BB900763C88 /* testPawn.cpp */,
 				43C50C6F2DDE5BB900763C88 /* testQueen.h */,
