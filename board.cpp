@@ -131,14 +131,19 @@ void Board::move(const Move& move)
 {
    if (move.getMoveType() == Move::MOVE)
    {
+      // get rid of what was at the new dest address
+      delete board[move.getDest().getCol()][move.getDest().getRow()];
+
       // board at destination has the same piece as the source
       board[move.getDest().getCol()][move.getDest().getRow()] =
       board[move.getSource().getCol()][move.getSource().getRow()];
 
+      // delete what was at source before, so now it is a space
+      //delete board[move.getSource().getCol()][move.getSource().getRow()];
+
       // new space object...
       Space* space = new Space(move.getSource().getCol(), move.getSource().getRow());
       // board at source is a new space piece now
-      delete board[move.getSource().getCol()][move.getSource().getRow()];
       board[move.getSource().getCol()][move.getSource().getRow()] = space;
       // add to how many moves made
       numMoves += 1;

@@ -1,13 +1,13 @@
 /***********************************************************************
  * Source File:
- *    BISHOP
+ *		QUEEN
  * Author:
  *    <your name here>
  * Summary:
- *    The bishop class
+ *    The queen class
  ************************************************************************/
 
-#include "pieceBishop.h"
+#include "pieceQueen.h"
 #include "board.h"
 #include "uiDraw.h"    // for draw*()
 
@@ -15,23 +15,23 @@
  * PIECE DRAW
  * Draw all the pieces.
  ***************************************************/
-void Bishop::display(ogstream* pgout) const
+void Queen::display(ogstream* pgout) const
 {
-	pgout->drawBishop(getPosition(), isWhite());
+	pgout->drawQueen(getPosition(), isWhite());
 }
 
 
 /**********************************************
  * BISHOP : GET POSITIONS
  *********************************************/
-void Bishop::getMoves(set <Move>& moves, const Board& board) const
+void Queen::getMoves(set <Move>& moves, const Board& board) const
 {
 	const Delta delta[] =
 	{
-		{-1,  1},       { 1,  1},
-
-		{-1, -1},       { 1, -1}
+		{-1,  1}, { 0,  1}, { 1,  1 },
+		{-1,  0},           { 1,  0 },
+		{-1, -1}, { 0, -1}, { 1, -1 }
 	};
 
-	moves = getMovesSlide(board, delta, 4);
+	moves = getMovesSlide(board, delta, 8);
 }
