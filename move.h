@@ -44,7 +44,9 @@ public:
    // setters
    void setSource(Position &pos) { this->source = pos; }
    void setDest(Position &pos) { this->dest = pos; }
+   void setDest(const Position &pos) { this->dest = pos; }
    void setCapture(PieceType capture) {this->capture = capture; this->moveType = MOVE; }
+   void setMoveType(const MoveType type) { this->moveType = type; }
 
    // operators
    bool operator == (const Move& rhs) const {

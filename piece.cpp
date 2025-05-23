@@ -36,3 +36,30 @@ const Piece & Piece::operator = (const Piece & rhs)
 void Piece::getMoves(set <Move> & movesSet, const Board & board) const
 {
 }
+
+set <Move> Piece::getMovesNoSlide(const Board& board, const Delta deltas[], int numDelta) const
+{
+   set <Move> moves;
+   // Iterate through the deltas
+   for (int i = 0; i < numDelta; i++)
+   {
+      // make a position for the new location
+      Position posDest(position, deltas[i]);
+      
+      // Check if we can move there
+      if (posDest.isValid() &&
+          (board[posDest].isWhite() != fWhite || board[posDest].getType() == SPACE) )
+      {
+         // Make a new move
+         Move move;
+         Position posCopy = getPosition(); // new source because it needs to be const
+         move.setSource(posCopy);
+         move.setDest(posDest);
+         // see if its a capture.
+         if (board[posDest] != SPACE)
+            move.setCapture(board[posDest].getType());
+         moves.insert(move);
+      }
+   }
+   return moves;
+}

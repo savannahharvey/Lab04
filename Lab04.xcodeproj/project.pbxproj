@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4342C8442DDFB1D20071CAF4 /* pieceQueen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4342C8432DDFB1D20071CAF4 /* pieceQueen.cpp */; };
 		43C50C732DDE5BB900763C88 /* testBishop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43C50C6A2DDE5BB900763C88 /* testBishop.cpp */; };
 		43C50C742DDE5BB900763C88 /* testKing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43C50C6C2DDE5BB900763C88 /* testKing.cpp */; };
 		43C50C752DDE5BB900763C88 /* testRook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43C50C722DDE5BB900763C88 /* testRook.cpp */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4342C8432DDFB1D20071CAF4 /* pieceQueen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pieceQueen.cpp; sourceTree = "<group>"; };
 		43C50C692DDE5BB900763C88 /* testBishop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testBishop.h; sourceTree = "<group>"; };
 		43C50C6A2DDE5BB900763C88 /* testBishop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testBishop.cpp; sourceTree = "<group>"; };
 		43C50C6B2DDE5BB900763C88 /* testKing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testKing.h; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				43C50C6E2DDE5BB900763C88 /* testPawn.cpp */,
 				43C50C6F2DDE5BB900763C88 /* testQueen.h */,
 				43C50C702DDE5BB900763C88 /* testQueen.cpp */,
+				4342C8432DDFB1D20071CAF4 /* pieceQueen.cpp */,
 				43C50C712DDE5BB900763C88 /* testRook.h */,
 				43C50C7E2DDE6F0C00763C88 /* piecePawn.h */,
 				43C50C7F2DDE6F3F00763C88 /* piecePawn.cpp */,
@@ -214,7 +217,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					C1EE0D722B28F39600E5D6E1 = {
 						CreatedOnToolsVersion = 15.1;
@@ -250,6 +253,7 @@
 				43C50C7D2DDE63BF00763C88 /* pieceKing.cpp in Sources */,
 				C1EE0D9E2B28F3C600E5D6E1 /* board.cpp in Sources */,
 				C1EE0DA62B28F3C600E5D6E1 /* uiDraw.cpp in Sources */,
+				4342C8442DDFB1D20071CAF4 /* pieceQueen.cpp in Sources */,
 				C1EE0DA32B28F3C600E5D6E1 /* testKnight.cpp in Sources */,
 				43C50C732DDE5BB900763C88 /* testBishop.cpp in Sources */,
 				43C50C742DDE5BB900763C88 /* testKing.cpp in Sources */,
@@ -306,6 +310,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -367,6 +372,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -391,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -399,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
