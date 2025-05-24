@@ -103,7 +103,9 @@
     <ClCompile Include="move.cpp" />
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="pieceBishop.cpp" />
+    <ClCompile Include="pieceKing.cpp" />
     <ClCompile Include="pieceKnight.cpp" />
+    <ClCompile Include="piecePawn.cpp" />
     <ClCompile Include="pieceQueen.cpp" />
     <ClCompile Include="pieceRook.cpp" />
     <ClCompile Include="position.cpp" />
@@ -126,7 +128,9 @@
     <ClInclude Include="move.h" />
     <ClInclude Include="piece.h" />
     <ClInclude Include="pieceBishop.h" />
+    <ClInclude Include="pieceKing.h" />
     <ClInclude Include="pieceKnight.h" />
+    <ClInclude Include="piecePawn.h" />
     <ClInclude Include="pieceQueen.h" />
     <ClInclude Include="pieceRook.h" />
     <ClInclude Include="pieceSpace.h" />

@@ -12,9 +12,14 @@
 #include "position.h"
 #include "piece.h"
 #include "board.h"
+#include "piecePawn.h"
+#include "pieceRook.h"
+#include "pieceBishop.h"
+#include "pieceQueen.h"
+#include "pieceKing.h"
 #include <cassert>
 
-
+/*
 /********************************************************
  *   a2a3
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
@@ -29,10 +34,28 @@
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************/
+ ********************************************************
 void TestBoard::move_pawnSimple()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(7, 7, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x01;
+   Move a2a3;
+   a2a3.source.colRow = 0x01;
+   a2a3.dest.colRow = 0x02;
+   a2a3.capture = SPACE;
+   
+   // EXERCISE
+   board.move(a2a3);
+
+   // VERIFY
+   assertUnit((board.board[0][1]->getType()) == SPACE);
+   assertUnit((board.board[0][2]->getType()) == PAWN);
+   
+   // TEARDOWN
+   board.board[0][1] = board.board[0][2] = nullptr;
 }
 
 
@@ -50,10 +73,31 @@ void TestBoard::move_pawnSimple()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************/
+ ********************************************************
 void TestBoard::move_pawnCapture()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(0, 0, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x05;
+   Rook rook(0, 0, true);
+   rook.fWhite = false;
+   rook.position.colRow = 0x16;
+   Move a6b7;
+   a6b7.source.colRow = 0x05;
+   a6b7.dest.colRow = 0x16;
+   a6b7.capture = ROOK;
+
+   // EXERCISE
+   board.move(a6b7);
+
+   // VERIFY
+   assertUnit(board.board[0][5]->getType() == SPACE);
+   assertUnit(board.board[1][6]->getType() == PAWN);
+
+   // TEARDOWN
+   board.board[0][5] = board.board[1][6] = nullptr;
 }
 
 
@@ -71,10 +115,28 @@ void TestBoard::move_pawnCapture()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************/
+ ********************************************************
 void TestBoard::move_pawnDouble()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(0, 0, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x41;
+   Move e2e4;
+   e2e4.source.colRow = 0x41;
+   e2e4.dest.colRow = 0x43;
+   e2e4.capture = SPACE;
+
+   // EXERCISE
+   board.move(e2e4);
+
+   // VERIFY
+   assertUnit(board.board[4][1]->getType() == SPACE);
+   assertUnit(board.board[4][3]->getType() == PAWN);
+
+   // TEARDOWN
+   board.board[4][1] = board.board[4][3] = nullptr;
 }
 
 
@@ -92,10 +154,33 @@ void TestBoard::move_pawnDouble()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************/
+ ********************************************************
 void TestBoard::move_pawnEnpassant()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(0, 0, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x04;
+   Pawn pawn(0, 0, true);
+   pawn.fWhite = false;
+   pawn.position.colRow = 0x14;
+   Move a5b6;
+   a5b6.source.colRow = 0x04;
+   a5b6.dest.colRow = 0x15;
+   a5b6.capture = PAWN;
+
+   // EXERCISE
+   board.move(a5b6);
+
+   // VERIFY
+   assertUnit(board.board[0][4]->getType() == SPACE);
+   assertUnit(board.board[1][4]->getType() == SPACE);
+   assertUnit(board.board[1][5]->getType() == PAWN);
+
+   // TEARDOWN
+   board.board[0][4] = board.board[1][4] = nullptr;
+   board.board[1][5] = nullptr;
 }
 
 
@@ -113,12 +198,30 @@ void TestBoard::move_pawnEnpassant()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************/
+ ********************************************************
 void TestBoard::move_pawnPromotion()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(0, 0, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x06;
+   Move a7a8;
+   a7a8.source.colRow = 0x06;
+   a7a8.dest.colRow = 0x07;
+   a7a8.capture = SPACE;
 
+   // EXERCISE
+   board.move(a7a8);
+
+   // VERIFY
+   assertUnit(board.board[0][6]->getType() == SPACE);
+   assertUnit(board.board[0][7]->getType() == ROOK);
+
+   // TEARDOWN
+   board.board[4][1] = board.board[4][3] = nullptr;
+}
+*/
 
 /********************************************************
  *    e5a5
@@ -137,7 +240,25 @@ void TestBoard::move_pawnPromotion()
  ********************************************************/
 void TestBoard::move_rookSlide()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(0, 0, false);
+   rook.fWhite = true;
+   rook.position.colRow = 0x44;
+   Move e5a5;
+   e5a5.source.colRow = 0x44;
+   e5a5.dest.colRow = 0x04;
+   e5a5.capture = SPACE;
+
+   // EXERCISE
+   board.move(e5a5);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[0][4]->getType() == ROOK);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[0][4] = nullptr;
 }
 
 
@@ -158,7 +279,28 @@ void TestBoard::move_rookSlide()
  ********************************************************/
 void TestBoard::move_rookAttack()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(0, 0, false);
+   rook.fWhite = true;
+   rook.position.colRow = 0x44;
+   Bishop bishop(0, 0, true);
+   bishop.fWhite = false;
+   bishop.position.colRow = 0x04;
+   Move e5a5;
+   e5a5.source.colRow = 0x44;
+   e5a5.dest.colRow = 0x04;
+   e5a5.capture = BISHOP;
+
+   // EXERCISE
+   board.move(e5a5);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[0][4]->getType() == ROOK);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[0][4] = nullptr;
 }
 
 
@@ -179,7 +321,25 @@ void TestBoard::move_rookAttack()
  ********************************************************/
 void TestBoard::move_bishopSlide()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(0, 0, false);
+   bishop.fWhite = true;
+   bishop.position.colRow = 0x44;
+   Move e5g3;
+   e5g3.source.colRow = 0x44;
+   e5g3.dest.colRow = 0x62;
+   e5g3.capture = BISHOP;
+
+   // EXERCISE
+   board.move(e5g3);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[0][4]->getType() == ROOK);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[6][2] = nullptr;
 }
 
 
@@ -200,7 +360,28 @@ void TestBoard::move_bishopSlide()
  ********************************************************/
 void TestBoard::move_bishopAttack()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(0, 0, false);
+   bishop.fWhite = true;
+   bishop.position.colRow = 0x44;
+   Queen queen(0, 0, true);
+   queen.fWhite = false;
+   queen.position.colRow = 0x62;
+   Move e5g3;
+   e5g3.source.colRow = 0x44;
+   e5g3.dest.colRow = 0x62;
+   e5g3.capture = BISHOP;
+
+   // EXERCISE
+   board.move(e5g3);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[6][2]->getType() == ROOK);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[0][4] = nullptr;
 }
 
 /********************************************************
@@ -210,8 +391,8 @@ void TestBoard::move_bishopAttack()
 * 8                     8       8                     8
 * 7                     7       7                     7
 * 6                     6       6                     6
-* 5          (q)        5       5                     5
-* 4                     4  -->  4           .         4
+* 5          (q)        5       5           .         5
+* 4                     4  -->  4                     4
 * 3                .    3       3               q     3
 * 2                     2       2                     2
 * 1                     1       1                     1
@@ -220,7 +401,25 @@ void TestBoard::move_bishopAttack()
 ********************************************************/
 void TestBoard::move_queenSlide()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Queen queen(0, 0, false);
+   queen.fWhite = true;
+   queen.position.colRow = 0x44;
+   Move e5g3;
+   e5g3.source.colRow = 0x44;
+   e5g3.dest.colRow = 0x62;
+   e5g3.capture = SPACE;
+
+   // EXERCISE
+   board.move(e5g3);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[6][2]->getType() == QUEEN);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[0][4] = nullptr;
 }
 
 
@@ -241,7 +440,28 @@ void TestBoard::move_queenSlide()
 ********************************************************/
 void TestBoard::move_queenAttack()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Queen queen(0, 0, false);
+   queen.fWhite = true;
+   queen.position.colRow = 0x44;
+   Bishop bishop(0, 0, true);
+   bishop.fWhite = false;
+   bishop.position.colRow = 0x04;
+   Move e5a5;
+   e5a5.source.colRow = 0x44;
+   e5a5.dest.colRow = 0x04;
+   e5a5.capture = BISHOP;
+
+   // EXERCISE
+   board.move(e5a5);
+
+   // VERIFY
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[0][4]->getType() == QUEEN);
+
+   // TEARDOWN
+   board.board[4][4] = board.board[0][4] = nullptr;
 }
 
 
@@ -262,7 +482,25 @@ void TestBoard::move_queenAttack()
  ********************************************************/
 void TestBoard::move_kingMove()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(0, 0, false);
+   king.fWhite = true;
+   king.position.colRow = 0x40;
+   Move e1f1;
+   e1f1.source.colRow = 0x40;
+   e1f1.dest.colRow = 0x50;
+   e1f1.capture = SPACE;
+
+   // EXERCISE
+   board.move(e1f1);
+
+   // VERIFY
+   assertUnit(board.board[4][0]->getType() == SPACE);
+   assertUnit(board.board[5][0]->getType() == KING);
+
+   // TEARDOWN
+   board.board[4][0] = board.board[5][0] = nullptr;
 }
 
 
@@ -283,7 +521,28 @@ void TestBoard::move_kingMove()
  ********************************************************/
 void TestBoard::move_kingAttack()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(0, 0, false);
+   king.fWhite = true;
+   king.position.colRow = 0x40;
+   Rook rook(0, 0, true);
+   rook.fWhite = false;
+   rook.position.colRow = 0x50;
+   Move e1f1;
+   e1f1.source.colRow = 0x40;
+   e1f1.dest.colRow = 0x50;
+   e1f1.capture = ROOK;
+
+   // EXERCISE
+   board.move(e1f1);
+
+   // VERIFY
+   assertUnit(board.board[4][0]->getType() == SPACE);
+   assertUnit(board.board[5][0]->getType() == KING);
+
+   // TEARDOWN
+   board.board[4][0] = board.board[5][0] = nullptr;
 }
 
 /********************************************************
@@ -303,7 +562,31 @@ void TestBoard::move_kingAttack()
  ********************************************************/
 void TestBoard::move_kingShortCastle()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(0, 0, false);
+   king.fWhite = true;
+   king.position.colRow = 0x40;
+   Rook rook(0, 0, false);
+   rook.fWhite = true;
+   rook.position.colRow = 0x70;
+   Move e1g1;
+   e1g1.source.colRow = 0x40;
+   e1g1.dest.colRow = 0x60;
+   e1g1.capture = SPACE;
+
+   // EXERCISE
+   board.move(e1g1);
+
+   // VERIFY
+   assertUnit(board.board[4][0]->getType() == SPACE);
+   assertUnit(board.board[6][0]->getType() == KING);
+   assertUnit(board.board[5][0]->getType() == ROOK);
+   assertUnit(board.board[7][0]->getType() == SPACE);
+
+   // TEARDOWN
+   board.board[4][0] = board.board[5][0] = nullptr;
+   board.board[6][0] = board.board[7][0] = nullptr;
 }
 
 
@@ -325,7 +608,32 @@ void TestBoard::move_kingShortCastle()
  ********************************************************/
 void TestBoard::move_kingLongCastle()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(0, 0, false);
+   king.fWhite = true;
+   king.position.colRow = 0x40;
+   Rook rook(7, 7, false);
+   rook.fWhite = true;
+   rook.position.colRow = 0x00;
+   Move e1g1;
+   e1g1.source.colRow = 0x40;
+   e1g1.dest.colRow = 0x20;
+   e1g1.capture = SPACE;
+
+   // EXERCISE
+   board.move(e1g1);
+
+   // VERIFY
+   assertUnit(board.board[0][0]->getType() == SPACE);
+   assertUnit(board.board[1][0]->getType() == SPACE);
+   assertUnit(board.board[2][0]->getType() == KING);
+   assertUnit(board.board[3][0]->getType() == ROOK);
+   assertUnit(board.board[4][0]->getType() == SPACE);
+
+   // TEARDOWN
+   board.board[4][0] = board.board[5][0] = nullptr;
+   board.board[6][0] = board.board[7][0] = nullptr;
 }
 
 
@@ -347,9 +655,111 @@ void TestBoard::move_kingLongCastle()
 ********************************************************/
 void TestBoard::construct_default()
 {
-  assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
 
+   // EXERCISE
+   Board board;
+
+   // VERIFY
+   assertUnit(board.board[0][0]->getType() == ROOK);
+   assertUnit(board.board[0][1]->getType() == PAWN);
+   assertUnit(board.board[0][2]->getType() == SPACE);
+   assertUnit(board.board[0][3]->getType() == SPACE);
+   assertUnit(board.board[0][4]->getType() == SPACE);
+   assertUnit(board.board[0][5]->getType() == SPACE);
+   assertUnit(board.board[0][6]->getType() == PAWN);
+   assertUnit(board.board[0][7]->getType() == ROOK);
+   assertUnit(board.board[1][0]->getType() == KNIGHT);
+   assertUnit(board.board[1][0]->getType() == PAWN);
+   assertUnit(board.board[1][1]->getType() == SPACE);
+   assertUnit(board.board[1][2]->getType() == SPACE);
+   assertUnit(board.board[1][3]->getType() == SPACE);
+   assertUnit(board.board[1][4]->getType() == SPACE);
+   assertUnit(board.board[1][5]->getType() == SPACE);
+   assertUnit(board.board[1][6]->getType() == PAWN);
+   assertUnit(board.board[1][7]->getType() == KNIGHT);
+   assertUnit(board.board[2][0]->getType() == BISHOP);
+   assertUnit(board.board[2][1]->getType() == PAWN);
+   assertUnit(board.board[2][2]->getType() == SPACE);
+   assertUnit(board.board[2][3]->getType() == SPACE);
+   assertUnit(board.board[2][4]->getType() == SPACE);
+   assertUnit(board.board[2][5]->getType() == SPACE);
+   assertUnit(board.board[2][6]->getType() == PAWN);
+   assertUnit(board.board[2][7]->getType() == BISHOP);
+   assertUnit(board.board[3][0]->getType() == QUEEN);
+   assertUnit(board.board[3][1]->getType() == PAWN);
+   assertUnit(board.board[3][2]->getType() == SPACE);
+   assertUnit(board.board[3][3]->getType() == SPACE);
+   assertUnit(board.board[3][4]->getType() == SPACE);
+   assertUnit(board.board[3][5]->getType() == SPACE);
+   assertUnit(board.board[3][6]->getType() == PAWN);
+   assertUnit(board.board[3][7]->getType() == QUEEN);
+   assertUnit(board.board[4][0]->getType() == KING);
+   assertUnit(board.board[4][1]->getType() == PAWN);
+   assertUnit(board.board[4][2]->getType() == SPACE);
+   assertUnit(board.board[4][3]->getType() == SPACE);
+   assertUnit(board.board[4][4]->getType() == SPACE);
+   assertUnit(board.board[4][5]->getType() == SPACE);
+   assertUnit(board.board[4][6]->getType() == PAWN);
+   assertUnit(board.board[4][7]->getType() == KING);
+   assertUnit(board.board[5][0]->getType() == BISHOP);
+   assertUnit(board.board[5][1]->getType() == PAWN);
+   assertUnit(board.board[5][2]->getType() == SPACE);
+   assertUnit(board.board[5][3]->getType() == SPACE);
+   assertUnit(board.board[5][4]->getType() == SPACE);
+   assertUnit(board.board[5][5]->getType() == SPACE);
+   assertUnit(board.board[5][6]->getType() == PAWN);
+   assertUnit(board.board[5][7]->getType() == BISHOP);
+   assertUnit(board.board[6][0]->getType() == KNIGHT);
+   assertUnit(board.board[6][1]->getType() == PAWN);
+   assertUnit(board.board[6][2]->getType() == SPACE);
+   assertUnit(board.board[6][3]->getType() == SPACE);
+   assertUnit(board.board[6][4]->getType() == SPACE);
+   assertUnit(board.board[6][5]->getType() == SPACE);
+   assertUnit(board.board[6][6]->getType() == PAWN);
+   assertUnit(board.board[6][7]->getType() == KNIGHT);
+   assertUnit(board.board[7][0]->getType() == ROOK);
+   assertUnit(board.board[7][1]->getType() == PAWN);
+   assertUnit(board.board[7][2]->getType() == SPACE);
+   assertUnit(board.board[7][3]->getType() == SPACE);
+   assertUnit(board.board[7][4]->getType() == SPACE);
+   assertUnit(board.board[7][5]->getType() == SPACE);
+   assertUnit(board.board[7][6]->getType() == PAWN);
+   assertUnit(board.board[7][7]->getType() == ROOK);
+   // TEARDOWN
+   board.board[0][0] = board.board[0][1] = nullptr;
+   board.board[0][2] = board.board[0][3] = nullptr;
+   board.board[0][4] = board.board[0][5] = nullptr;
+   board.board[0][6] = board.board[0][7] = nullptr;
+   board.board[1][0] = board.board[1][1] = nullptr;
+   board.board[1][2] = board.board[1][3] = nullptr;
+   board.board[1][4] = board.board[1][5] = nullptr;
+   board.board[1][6] = board.board[1][7] = nullptr;
+   board.board[2][0] = board.board[2][1] = nullptr;
+   board.board[2][2] = board.board[2][3] = nullptr;
+   board.board[2][4] = board.board[2][5] = nullptr;
+   board.board[2][6] = board.board[2][7] = nullptr;
+   board.board[3][0] = board.board[3][1] = nullptr;
+   board.board[3][2] = board.board[3][3] = nullptr;
+   board.board[3][4] = board.board[3][5] = nullptr;
+   board.board[3][6] = board.board[3][7] = nullptr;
+   board.board[4][0] = board.board[4][1] = nullptr;
+   board.board[4][2] = board.board[4][3] = nullptr;
+   board.board[4][4] = board.board[4][5] = nullptr;
+   board.board[4][6] = board.board[4][7] = nullptr;
+   board.board[5][0] = board.board[5][1] = nullptr;
+   board.board[5][2] = board.board[5][3] = nullptr;
+   board.board[5][4] = board.board[5][5] = nullptr;
+   board.board[5][6] = board.board[5][7] = nullptr;
+   board.board[6][0] = board.board[6][1] = nullptr;
+   board.board[6][2] = board.board[6][3] = nullptr;
+   board.board[6][4] = board.board[6][5] = nullptr;
+   board.board[6][6] = board.board[6][7] = nullptr;
+   board.board[7][0] = board.board[7][1] = nullptr;
+   board.board[7][2] = board.board[7][3] = nullptr;
+   board.board[7][4] = board.board[7][5] = nullptr;
+   board.board[7][6] = board.board[7][7] = nullptr;
+}
 
 
 /********************************************************
