@@ -63,3 +63,39 @@ set <Move> Piece::getMovesNoSlide(const Board& board, const Delta deltas[], int 
    }
    return moves;
 }
+
+/*******************************************
+* PIECE
+* get moves for sliding pieces, queen, bishop and rook
+*******************************************/
+set <Move> Piece::getMovesSlide(const Board& board, const Delta deltas[], int numDelta) const
+{
+   set <Move> moves;
+   for (int i = 0; i < numDelta; i++)
+   {
+      // new Position that is the next possible move
+      Position posMove(position.getCol() + deltas[i].dCol,
+         position.getRow() + deltas[i].dRow);
+
+      while (posMove.isValid() &&
+         (board[posMove].isWhite() != fWhite ||
+            board[posMove].getType() == SPACE))
+      {
+         // create a new possible move and attributes
+         Move move;
+         Position posCopy = getPosition(); // new pos because it needs to be const
+         move.setSource(posCopy);
+         move.setDest(posMove);
+         move.setCapture(board[posMove].getType());
+
+         // insert into possible moves
+         moves.insert(move);
+
+         // change posMove to the next delta position for the next loop
+         posMove.setRow(posMove.getRow() + deltas[i].dRow);
+         posMove.setCol(posMove.getCol() + deltas[i].dCol);
+      }
+   }
+
+   return moves;
+}

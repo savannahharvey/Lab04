@@ -203,24 +203,161 @@ void Board::assertBoard()
  *********************************************/
 void Board::move(const Move& move)
 {
+   int destCol = move.getDest().getCol();
+   int destRow = move.getDest().getRow();
+   int srcCol = move.getSource().getCol();
+   int srcRow = move.getSource().getRow();
+
    if (move.getMoveType() == Move::MOVE)
    {
-      // get rid of what was at the new dest address
-      delete board[move.getDest().getCol()][move.getDest().getRow()];
-
-      // board at destination has the same piece as the source
-      board[move.getDest().getCol()][move.getDest().getRow()] =
-      board[move.getSource().getCol()][move.getSource().getRow()];
-
-      // delete what was at source before, so now it is a space
-      //delete board[move.getSource().getCol()][move.getSource().getRow()];
-
-      // new space object...
-      Space* space = new Space(move.getSource().getCol(), move.getSource().getRow());
-      // board at source is a new space piece now
-      board[move.getSource().getCol()][move.getSource().getRow()] = space;
       // add to how many moves made
       numMoves += 1;
+
+      // get rid of what was at the new dest address
+      delete board[destCol][destRow];
+
+      // board at destination has the same piece as the source
+      board[destCol][destRow] = board[srcCol][srcRow];
+
+      // new space object...
+      Space* space = new Space(srcCol, srcRow);
+      // board at source is a new space piece now
+      board[srcCol][srcRow] = space;
+   }
+
+   else if (move.getMoveType() == Move::PROMOTION)
+   {
+      // add to how many moves made
+      numMoves += 1;
+
+      // is White
+      bool isW = board[srcCol][srcRow]->isWhite();
+
+      // new queen object...
+      Queen* queen = new Queen(srcCol, srcRow, isW);
+      // delete pawn
+      delete board[srcCol][srcRow];
+
+      // board at destination is new queen object
+      board[destCol][destRow] = queen;
+
+      // new space object...
+      Space* space = new Space(srcCol, srcRow);
+      // board at source is a new space piece now
+      board[srcCol][srcRow] = space;
+   }
+
+   else if (move.getMoveType() == Move::ENPASSANT)
+   {
+      // add to how many moves made
+      numMoves += 1;
+
+      // get rid of what was at the new dest address
+      delete board[destCol][destRow];
+
+      // board at destination has the same piece as the source
+      board[destCol][destRow] = board[srcCol][srcRow];
+
+      // new space object...
+      Space* space = new Space(srcCol, srcRow);
+      // board at source is a new space piece now
+      board[srcCol][srcRow] = space;
+
+      // delete pawn and add space there
+      if (board[destCol][destRow]->isWhite() == true) // if white
+      {
+         delete board[destCol][destRow - 1];
+         Space* space = new Space(destCol, destRow - 1);
+         board[destCol][destRow - 1] = space;
+      }
+      else
+      {
+         delete board[destCol][destRow + 1];
+         Space* space = new Space(destCol, destRow + 1);
+         board[destCol][destRow + 1] = space;
+      }
+   }
+
+   else if (move.getMoveType() == Move::CASTLE_KING)
+   {
+      // add to how many moves made
+      numMoves += 1;
+
+      if (board[srcCol][srcRow]->isWhite() == true) // if white
+      {
+         // get rid of what was at the new dest addresses
+         delete board[5][0];
+         delete board[6][0];
+
+         // move king and rook
+         board[destCol][destRow] = board[srcCol][srcRow];
+         board[5][0] = board[7][0];
+
+         // new space objects...
+         Space* space = new Space(srcCol, srcRow);
+         Space* space2 = new Space(7, 0);
+         // board at source of king and rook are new space pieces now
+         board[srcCol][srcRow] = space;
+         board[7][0] = space2;
+      }
+      else
+      {
+         // get rid of what was at the new dest addresses
+         delete board[5][7];
+         delete board[6][7];
+
+         // move king and rook
+         board[destCol][destRow] = board[srcCol][srcRow];
+         board[5][7] = board[7][7];
+
+         // new space objects...
+         Space* space = new Space(srcCol, srcRow);
+         Space* space2 = new Space(7, 7);
+         // board at source of king and rook are new space pieces now
+         board[srcCol][srcRow] = space;
+         board[7][7] = space2;
+      }
+   }
+
+   else if (move.getMoveType() == Move::CASTLE_QUEEN)
+   {
+      // add to how many moves made
+      numMoves += 1;
+
+      if (board[srcCol][srcRow]->isWhite() == true) // if white
+      {
+         // get rid of what was at the new dest addresses
+         delete board[3][0];
+         delete board[2][0];
+
+         // move king and rook
+         board[destCol][destRow] = board[srcCol][srcRow];
+         board[3][0] = board[0][0];
+
+         // new space objects...
+         Space* space = new Space(srcCol, srcRow);
+         Space* space2 = new Space(0, 0);
+         // board at source of king and rook are new space pieces now
+         board[srcCol][srcRow] = space;
+         board[0][0] = space2;
+      }
+      else
+      {
+         // get rid of what was at the new dest addresses
+         delete board[3][7];
+         delete board[2][7];
+
+         // move king and rook
+         board[destCol][destRow] = board[srcCol][srcRow];
+         board[3][7] = board[0][7];
+
+         // new space objects...
+         Space* space = new Space(srcCol, srcRow);
+         Space* space2 = new Space(0, 7);
+         // board at source of king and rook are new space pieces now
+         board[srcCol][srcRow] = space;
+         board[0][7] = space2;
+      }
    }
 }
 
