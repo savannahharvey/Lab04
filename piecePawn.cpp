@@ -44,7 +44,7 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
    {
       // check right capture
       if (board[Position(col + 1, row + 1)].getType() != SPACE &&
-      not board[Position(col + 1, row + 1)].isWhite()) // it should be a black thing
+      ! board[Position(col + 1, row + 1)].isWhite()) // it should be a black thing
       {
          Move move;
          Position source(position);
@@ -56,7 +56,7 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       
       // check left captue
       if (board[Position(col - 1, row + 1)].getType() != SPACE &&
-      not board[Position(col - 1, row + 1)].isWhite()) // it should be a black thing
+      ! board[Position(col - 1, row + 1)].isWhite()) // it should be a black thing
       {
          Move move;
          Position source(position);

@@ -117,7 +117,7 @@ public:
          {
             // create a new possible move and attributes
             Move move;
-            Position posCopy = getPosition(); // new source because it needs to be const
+            Position posCopy = getPosition(); // new pos because it needs to be const
             move.setSource(posCopy);
             move.setDest(posMove);
             move.setCapture(board[posMove].getType());

@@ -28,10 +28,10 @@ struct Delta
    int dRow;
 };
 
-const Delta ADD_R = { 1,  0 };
-const Delta ADD_C = { 0,  1 };
-const Delta SUB_R = { -1,  0 };
-const Delta SUB_C = { 0, -1 };
+const Delta ADD_R = {  0,  1 };
+const Delta ADD_C = {  1,  0 };
+const Delta SUB_R = {  0, -1 };
+const Delta SUB_C = { -1,  0 };
 
 
 class PositionTest;
@@ -114,17 +114,19 @@ public:
    }
    void setRow(int r)
    {
+      // | concatenates 0x[a]0 with 0x0[b] to get 0x[a][b]
       if (r >= 0 && r < 8)
-         colRow = (colRow & 0xf0) | (r & 0x0f); // | concatenates 0x[a]0 with 0x0[b] to get 0x[a][b] i think...
+         colRow = (colRow & 0xf0) | (r & 0x0f);
       else
-         colRow = -1;
+         colRow = 0xff;
    }
    void setCol(int c)
    {
+      // | concatenates 0x0[a] with 0x0[b] << 4 to get 0x[b][a]
       if (c >= 0 && c < 8)
-         colRow = (colRow & 0x0f) | ((c & 0x0f) << 4);  // | concatenates 0x0[a] with 0x0[b] << 4 to get 0x[b][a] i think...
+         colRow = (colRow & 0x0f) | ((c & 0x0f) << 4);
       else
-         colRow = -1;
+         colRow = 0xff;
    }
    void set(int c, int r)
    {
@@ -233,4 +235,3 @@ private:
 
 ostream& operator << (ostream& out, const Position& pos);
 istream& operator >> (istream& in, Position& pos);
-

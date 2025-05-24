@@ -19,7 +19,7 @@
 #include "pieceKing.h"
 #include <cassert>
 
-/*
+
 /********************************************************
  *   a2a3
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
@@ -34,7 +34,7 @@
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************
+ ********************************************************/
 void TestBoard::move_pawnSimple()
 {
    // SETUP
@@ -73,7 +73,7 @@ void TestBoard::move_pawnSimple()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************
+ ********************************************************/
 void TestBoard::move_pawnCapture()
 {
    // SETUP
@@ -115,7 +115,7 @@ void TestBoard::move_pawnCapture()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************
+ ********************************************************/
 void TestBoard::move_pawnDouble()
 {
    // SETUP
@@ -154,7 +154,7 @@ void TestBoard::move_pawnDouble()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************
+ ********************************************************/
 void TestBoard::move_pawnEnpassant()
 {
    // SETUP
@@ -162,9 +162,9 @@ void TestBoard::move_pawnEnpassant()
    Pawn pawn(0, 0, false);
    pawn.fWhite = true;
    pawn.position.colRow = 0x04;
-   Pawn pawn(0, 0, true);
-   pawn.fWhite = false;
-   pawn.position.colRow = 0x14;
+   Pawn pawnb(0, 0, true);
+   pawnb.fWhite = false;
+   pawnb.position.colRow = 0x14;
    Move a5b6;
    a5b6.source.colRow = 0x04;
    a5b6.dest.colRow = 0x15;
@@ -198,7 +198,7 @@ void TestBoard::move_pawnEnpassant()
  * 1                     1       1                     1
  * |                     |       |                     |
  * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
- ********************************************************
+ ********************************************************/
 void TestBoard::move_pawnPromotion()
 {
    // SETUP
@@ -221,7 +221,7 @@ void TestBoard::move_pawnPromotion()
    // TEARDOWN
    board.board[4][1] = board.board[4][3] = nullptr;
 }
-*/
+
 
 /********************************************************
  *    e5a5

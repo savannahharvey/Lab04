@@ -107,40 +107,40 @@ void TestBishop::getMoves_slideToEnd()
    set <Move> moves;
    Move c2b3;
    c2b3.source.colRow = 0x21;
-   c2b3.dest.colRow = 0x12;
+   c2b3.dest.colRow = 0x12; // 18
    c2b3.capture = SPACE;
    Move c2d3;
    c2d3.source.colRow = 0x21;
-   c2d3.dest.colRow = 0x32;
+   c2d3.dest.colRow = 0x32; // 50
    c2d3.capture = SPACE;
    Move c2d0;
    c2d0.source.colRow = 0x21;
-   c2d0.dest.colRow = 0x30;
+   c2d0.dest.colRow = 0x30; // 48
    c2d0.capture = SPACE;
    Move c2b0;
    c2b0.source.colRow = 0x21;
-   c2b0.dest.colRow = 0x10;
+   c2b0.dest.colRow = 0x10; // 16
    c2b0.capture = SPACE;
    Move c2a4;
    c2a4.source.colRow = 0x21;
-   c2a4.dest.colRow = 0x03;
+   c2a4.dest.colRow = 0x03; // 3
    c2a4.capture = SPACE;
    Move c2e4;
    c2e4.source.colRow = 0x21;
-   c2e4.dest.colRow = 0x43;
+   c2e4.dest.colRow = 0x43; // 67
    c2e4.capture = SPACE;
    Move c2f5;
    c2f5.source.colRow = 0x21;
-   c2f5.dest.colRow = 0x54;
+   c2f5.dest.colRow = 0x54; // 84
    c2f5.capture = SPACE;
    Move c2g6;
    c2g6.source.colRow = 0x21;
-   c2g6.dest.colRow = 0x65;
+   c2g6.dest.colRow = 0x65; // 101
    c2g6.capture = SPACE;
-   Move c2f7;
-   c2f7.source.colRow = 0x21;
-   c2f7.dest.colRow = 0x76;
-   c2f7.capture = SPACE;
+   Move c2h7;
+   c2h7.source.colRow = 0x21;
+   c2h7.dest.colRow = 0x76; // 118
+   c2h7.capture = SPACE;
 
 
    // EXERCISE
@@ -156,7 +156,7 @@ void TestBishop::getMoves_slideToEnd()
    assertUnit(moves.find(c2e4) != moves.end());
    assertUnit(moves.find(c2f5) != moves.end());
    assertUnit(moves.find(c2g6) != moves.end());
-   assertUnit(moves.find(c2f7) != moves.end());
+   assertUnit(moves.find(c2h7) != moves.end());
 
 
    // TEARDOWN

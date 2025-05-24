@@ -82,27 +82,9 @@ void Board::display(const Position & posHover, const Position & posSelect) const
       for (int row = 0; row < 8; ++row)
       {
          Piece* piece = board[col][row];
-         if (piece)
-         {
-            piece->display(&gout);
-         }
-         else
-         {
-            std::cout << "Not found";
-         }
+         piece->display(&gout);
       }
    }
-
-
-   /*Knight knight(1, 0, true);
-   Knight knight1(6, 0, true);
-   Knight knight2(1, 7, false);
-   Knight knight3(6, 7, false);
-   
-   knight.display(&gout);
-   knight1.display(&gout);
-   knight2.display(&gout);
-   knight3.display(&gout);*/
    
    gout.drawPossible(posSelect);
 }
@@ -114,6 +96,11 @@ void Board::display(const Position & posHover, const Position & posSelect) const
  ************************************************/
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
 {
+   // free everything
+   for (int r = 0; r < 8; r++)
+      for (int c = 0; c < 8; c++)
+         board[c][r] = nullptr;
+
    numMoves = 0;
    pgout = nullptr;
 
@@ -246,6 +233,11 @@ void Board::move(const Move& move)
  *********************************************/
 BoardEmpty::BoardEmpty() : BoardDummy(), pSpace(nullptr), moveNumber(0)
 {
+   // free everything
+   for (int r = 0; r < 8; r++)
+      for (int c = 0; c < 8; c++)
+         board[c][r] = nullptr;
+
    pSpace = new Space(0, 0);
 }
 BoardEmpty::~BoardEmpty() 
