@@ -427,8 +427,39 @@ void TestPawn::getMoves_enpassantBlack()
  * +---a-b-c-d-e-f-g-h---+
  **************************************/
 void TestPawn::getMoves_promotionWhite()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
+{  // SETUP
+   BoardEmpty board;
+   Pawn pawn(0, 0, false);
+   pawn.fWhite = true;
+   pawn.position.colRow = 0x16;
+   pawn.nMoves = 1;
+   board.board[1][6] = &pawn;
+   
+   Black P(PAWN);
+   board.board[0][7] = board.board[2][7] = &P;
+   
+   set <Move> moves;
+   Move b7a8p, b7b8, b7c8p;
+
+   b7a8p.source.colRow = b7b8.source.colRow = b7c8p.source.colRow = 0x16;
+   b7a8p.capture = b7c8p.capture = PAWN;
+   b7a8p.promote = b7b8.promote = b7c8p.promote = QUEEN;
+   b7a8p.dest.colRow = 0x07;
+   b7b8.dest.colRow  = 0x17;
+   b7c8p.dest.colRow = 0x27;
+   
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 3);  // 2 move
+   assertUnit(moves.find(b7a8p) != moves.end());
+   assertUnit(moves.find(b7b8)  != moves.end());
+   assertUnit(moves.find(b7c8p) != moves.end());
+
+   // TEARDOWN
+                       board.board[1][5] =
+   board.board[0][4] = board.board[1][5] = board.board[2][4] = nullptr;
 }
 
 
@@ -446,7 +477,7 @@ void TestPawn::getMoves_promotionWhite()
  * 4                     4
  * 3                     3
  * 2          (P)        2
- * 1         r   r       1
+ * 1         r . r       1
  * |                     |
  * +---a-b-c-d-e-f-g-h---+
  **************************************/
@@ -463,6 +494,13 @@ void TestPawn::getMoves_promotionBlack()
  **************************************/
 void TestPawn::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   const Pawn pawn(7, 7, false /*white*/);
+   PieceType pt = SPACE;
 
+   // EXERCISE
+   pt = pawn.getType();
+
+   // VERIFY
+   assertUnit(pt == PAWN);
+}  // TEARDOWN
