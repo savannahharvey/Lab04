@@ -8,7 +8,6 @@
  ************************************************************************/
 
 #include "testKing.h"
-//#include "pieceRook.h"
 #include "pieceKing.h"     
 #include "board.h"
 #include "uiDraw.h"
