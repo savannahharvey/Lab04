@@ -8,7 +8,6 @@
  ************************************************************************/
 
 #include "testKing.h"
-//#include "pieceRook.h"
 #include "pieceKing.h"     
 #include "board.h"
 #include "uiDraw.h"
@@ -36,6 +35,7 @@ void TestKing::getMoves_blocked()
    King king(3, 4, false);
    king.fWhite = true;
    king.position.colRow = 0x34;
+   king.nMoves = 1;
    board.board[3][4] = &king;
    
    White white(PAWN);
@@ -78,6 +78,7 @@ void TestKing::getMoves_capture()
    King king(3, 4, false);
    king.fWhite = true;
    king.position.colRow = 0x34;
+   king.nMoves = 1;
    board.board[3][4] = &king;
    
    Black black(PAWN);
@@ -150,6 +151,7 @@ void TestKing::getMoves_free()
    King king(3, 4, false);
    king.fWhite = true;
    king.position.colRow = 0x34;
+   king.nMoves = 1;
    board.board[3][4] = &king;
 
    set <Move> moves;
@@ -210,6 +212,7 @@ void TestKing::getMoves_end()
    King king(0, 0, false);
    king.fWhite = true;
    king.position.colRow = 0x00;
+   king.nMoves = 1;
    board.board[0][0] = &king;
 
    set <Move> moves;
@@ -257,13 +260,17 @@ void TestKing::getMoves_whiteCastle()
    King king(4, 0, false);
    king.fWhite = true;
    king.position.colRow = 0x40;
+   king.nMoves = 0;
    board.board[4][0] = &king;
    
    White pawn(PAWN);
    White rook(ROOK);
+   White space(SPACE);
    
    board.board[3][1] = board.board[4][1] = board.board[5][1] = &pawn;
    board.board[0][0] = board.board[7][0] = &rook;
+   board.board[1][0] = board.board[2][0] = board.board[3][0] =
+   board.board[5][0] = board.board[6][0] = &space;
    
    set <Move> moves;
    Move e1c1C, e1d1, e1f1, e1g1c;
@@ -309,12 +316,13 @@ void TestKing::getMoves_blackCastle()
 {  // SETUP
    BoardEmpty board;
    King king(4, 7, false);
-   king.fWhite = true;
+   king.fWhite = false;
    king.position.colRow = 0x47;
+   king.nMoves = 0;
    board.board[4][7] = &king;
    
-   White pawn(PAWN);
-   White rook(ROOK);
+   Black pawn(PAWN);
+   Black rook(ROOK);
    
    board.board[3][6] = board.board[4][6] = board.board[5][6] = &pawn;
    board.board[0][7] = board.board[7][7] = &rook;
@@ -366,7 +374,7 @@ void TestKing::getMoves_whiteCastleKingMoved()
    King king(4, 0, false);
    king.fWhite = true;
    king.position.colRow = 0x40;
-   king.nMoves = 2;
+   king.nMoves = 1;
    board.board[4][0] = &king;
    
    White pawn(PAWN);

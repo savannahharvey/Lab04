@@ -54,6 +54,7 @@ const Piece& Board::operator [] (const Position& pos) const
 {
    return *board[pos.getCol()][pos.getRow()];
 }
+
 Piece& Board::operator [] (const Position& pos)
 {
    return *board[pos.getCol()][pos.getRow()];

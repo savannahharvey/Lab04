@@ -13,7 +13,9 @@
 #include "testKnight.h"
 #include "testBishop.h"
 #include "testQueen.h"
+#include "testKing.h"
 #include "testRook.h"
+#include "testPawn.h"
 #include "testPosition.h"
 #include "testBoard.h"
 #include "testMove.h"
@@ -59,5 +61,7 @@ void testRunner()
    TestKnight().run();
    TestBishop().run();
    TestQueen().run();
+   TestKing().run();
    TestRook().run();
+   TestPawn().run();
 }
