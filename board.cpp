@@ -76,7 +76,6 @@ void Board::display(const Position & posHover, const Position & posSelect) const
    gout.drawSelected(posSelect);
 
    // draw the pieces
-
    for (int col = 0; col < 8; ++col)
    {
       for (int row = 0; row < 8; ++row)
@@ -107,8 +106,8 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
    board[0][0] = new Rook(0, 0, true);
    board[1][0] = new Knight(1, 0, true);
    board[2][0] = new Bishop(2, 0, true);
-   board[3][0] = new Queen(0, 0, true);
-   board[4][0] = new King(0, 0, true);
+   board[3][0] = new Queen(3, 0, true);
+   board[4][0] = new King(4, 0, true);
    board[5][0] = new Bishop(5, 0, true);
    board[6][0] = new Knight(6, 0, true);
    board[7][0] = new Rook(7, 0, true);
@@ -160,14 +159,14 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
    board[5][6] = new Pawn(5, 6, false);
    board[6][6] = new Pawn(6, 6, false);
    board[7][6] = new Pawn(7, 6, false);
-   board[0][7] = new Rook(0, 7, true);
-   board[1][7] = new Knight(1, 7, true);
-   board[2][7] = new Bishop(2, 7, true);
-   board[3][7] = new Queen(0, 7, true);
-   board[4][7] = new King(0, 7, true);
-   board[5][7] = new Bishop(5, 7, true);
-   board[6][7] = new Knight(6, 7, true);
-   board[7][7] = new Rook(7, 7, true);
+   board[0][7] = new Rook(0, 7, false);
+   board[1][7] = new Knight(1, 7, false);
+   board[2][7] = new Bishop(2, 7, false);
+   board[3][7] = new Queen(3, 7, false);
+   board[4][7] = new King(4, 7, false);
+   board[5][7] = new Bishop(5, 7, false);
+   board[6][7] = new Knight(6, 7, false);
+   board[7][7] = new Rook(7, 7, false);
 }
 
 

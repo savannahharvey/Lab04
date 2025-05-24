@@ -17,7 +17,8 @@
  ***************************************************/
 void Queen::display(ogstream* pgout) const
 {
-	pgout->drawQueen(getPosition(), isWhite());
+	bool black = !isWhite();
+	pgout->drawQueen(getPosition(), black);
 }
 
 

@@ -25,10 +25,10 @@
 class Pawn : public Piece
 {
 public:
-   Pawn(const Position& pos, bool isWhite) : Piece(10,10,true) { }
-   Pawn(int c, int r, bool isWhite) : Piece(c, r, true) { }
+   Pawn(const Position& pos, bool isWhite) : Piece(10,10, isWhite) { }
+   Pawn(int c, int r, bool isWhite) : Piece(c, r, isWhite) { }
    ~Pawn() {                }
    PieceType getType()            const { return PAWN; }
    void getMoves(set <Move>& moves, const Board& board) const;
-   void display(ogstream* pgout)  const {}
+   void display(ogstream* pgout)  const;
 };

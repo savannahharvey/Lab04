@@ -17,7 +17,8 @@
  ***************************************************/
 void Bishop::display(ogstream* pgout) const
 {
-	pgout->drawBishop(getPosition(), isWhite());
+	bool black = !isWhite();
+	pgout->drawBishop(getPosition(), black);
 }
 
 

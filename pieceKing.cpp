@@ -8,6 +8,17 @@
 #include "board.h"
 #include "uiDraw.h"    // for draw*()
 
+ /***************************************************
+ * PIECE DRAW
+ * Draw all the pieces.
+ ***************************************************/
+void King::display(ogstream* pgout) const
+{
+   bool black = !isWhite();
+   pgout->drawKing(getPosition(), black);
+}
+
+
 void King::getMoves(set <Move>& moves, const Board& board) const
 {
    const Delta deltas[] =

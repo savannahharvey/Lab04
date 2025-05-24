@@ -9,6 +9,17 @@
 #include "board.h"
 #include "uiDraw.h"    // for draw*()
 
+ /***************************************************
+ * PIECE DRAW
+ * Draw all the pieces.
+ ***************************************************/
+void Pawn::display(ogstream* pgout) const
+{
+   bool black = !isWhite();
+   pgout->drawPawn(getPosition(), black);
+}
+
+
 void Pawn::getMoves(set <Move>& moves, const Board& board) const
 {
    int col = position.getCol();
