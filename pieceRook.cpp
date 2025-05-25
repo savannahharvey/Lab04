@@ -34,5 +34,5 @@ void Rook::getMoves(set <Move>& moves, const Board& board) const
 		          { 0, -1}
 	};
 
-	moves = getMovesSlide(board, delta, 8);
+	moves = getMovesSlide(board, delta, 4);
 }
