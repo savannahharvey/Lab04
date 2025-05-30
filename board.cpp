@@ -22,6 +22,10 @@
 using namespace std;
 
 
+#include <iostream>
+using namespace std;
+
+
 /***********************************************
  * BOARD : RESET
  *         Just fill the board with the known pieces
@@ -75,17 +79,35 @@ void Board::display(const Position & posHover, const Position & posSelect) const
    gout.drawHover(posHover);
    gout.drawSelected(posSelect);
 
+   // draw possible moves
+   set <Move> possible;
+   int c = posSelect.getCol();
+   int r = posSelect.getRow();
+
+   if (c >= 0 && c < 8 && r >= 0 && r < 8) // valid col and row
+   {
+      Piece* pPiece = board[c][r];
+      if (pPiece)
+      {
+         pPiece->getMoves(possible, *this); // getMoves changes possible
+      }
+   }
+
+   set <Move> ::iterator it;
+   for (it = possible.begin(); it != possible.end(); ++it)
+      // iterate through and display possible
+      gout.drawPossible((*it).getDest());
+
    // draw the pieces
    for (int col = 0; col < 8; ++col)
    {
       for (int row = 0; row < 8; ++row)
       {
          Piece* piece = board[col][row];
-         piece->display(&gout);
+         if (piece != nullptr)
+            piece->display(&gout);
       }
    }
-   
-   gout.drawPossible(posSelect);
 }
 
 
@@ -96,8 +118,8 @@ void Board::display(const Position & posHover, const Position & posSelect) const
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
 {
    // free everything
-   for (int r = 0; r < 8; r++)
-      for (int c = 0; c < 8; c++)
+   for (int c = 0; c < 8; c++)
+      for (int r = 0; r < 8; r++)
          board[c][r] = nullptr;
 
    numMoves = 0;
@@ -177,8 +199,8 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
 void Board::free()
 {
    // free everything
-   for (int r = 0; r < 8; r++)
-      for (int c = 0; c < 8; c++)
+   for (int c = 0; c < 8; c++)
+      for (int r = 0; r < 8; r++)
          board[c][r] = nullptr;
 }
 

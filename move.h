@@ -43,6 +43,7 @@ public:
    
    // setters
    void setSource(Position &pos) { this->source = pos; }
+   void setSource(const Position& pos) { this->source = pos; }
    void setDest(Position &pos) { this->dest = pos; }
    void setDest(const Position &pos) { this->dest = pos; }
    void setCapture(PieceType capture) {this->capture = capture; this->moveType = MOVE; }

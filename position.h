@@ -178,13 +178,11 @@ public:
    {
       if (((int)(x / getSquareWidth()) - 1) > 7 || ((int)(x / getSquareWidth()) - 1) < 0)
          colRow = 0xff;
-      if (8 - (int)(y / getSquareHeight()) > 7 || (8 - (int)(y / getSquareHeight())) < 0)
-         colRow = 0xff;
-      if (getCol() == -1 || getRow() == -1)
+      else if (8 - (int)(y / getSquareHeight()) > 7 || (8 - (int)(y / getSquareHeight())) < 0)
          colRow = 0xff;
       else
-         set((int)(x / getSquareWidth()) - 1,
-            8 - (int)(y / getSquareHeight()));
+      set((int)(x / getSquareWidth()) - 1,
+         8 - (int)(y / getSquareHeight()));
    }
    double getSquareWidth()  const { return squareWidth; }
    double getSquareHeight() const { return squareHeight; }

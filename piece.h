@@ -97,7 +97,7 @@ public:
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
    virtual void display(ogstream * pgout)                         const = 0;
-   void getMoves(set <Move> & moves, const Board & board) const;
+   virtual void getMoves(set <Move>& moves, const Board& board)   const = 0;
    
    set <Move> getMovesNoSlide(const Board& board, const Delta deltas[], int numDelta) const;
 
@@ -125,6 +125,8 @@ public:
    ~PieceDerived()                                                       { }
    PieceType getType()            const     { return SPACE;                  }
    void display(ogstream* pgout)  const     { assert(false);                 }
+   virtual void getMoves(set <Move>& moves, const Board& board) const override {};
+
 
 };
 
@@ -171,6 +173,8 @@ public:
    // overwritten by the various pieces
    PieceType getType()             const { assert(false); return SPACE; }
    void display(ogstream * pgout)  const { assert(false);               }
+   virtual void getMoves(set <Move>& moves, const Board& board) const override {};
+
 };
 
 /***************************************************
@@ -209,6 +213,8 @@ public:
    const Position& getPosition()  const { return position; }
    PieceType getType()            const { return pt;       }
    bool isWhite()                 const { return fWhite;   }
+   virtual void getMoves(set <Move>& moves, const Board& board) const override {};
+
 
 
    static int numConstruct;

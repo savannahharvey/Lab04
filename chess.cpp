@@ -34,6 +34,7 @@ void callBack(Interface *pUI, void * p)
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p;
 
+   // display board, pieces, and possible moves
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition());
 }
 

@@ -23,7 +23,7 @@ void Queen::display(ogstream* pgout) const
 
 
 /**********************************************
- * BISHOP : GET POSITIONS
+ * QUEEN : GET POSITIONS
  *********************************************/
 void Queen::getMoves(set <Move>& moves, const Board& board) const
 {
