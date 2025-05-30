@@ -232,7 +232,7 @@ void Board::move(const Move& move)
    if (move.getMoveType() == Move::MOVE)
    {
       // add to how many moves made
-      numMoves += 1;
+      numMoves++;
 
       // get rid of what was at the new dest address
       delete board[destCol][destRow];
@@ -245,7 +245,6 @@ void Board::move(const Move& move)
       Space* space = new Space(srcCol, srcRow);
       // board at source is a new space piece now
       board[srcCol][srcRow] = space;
-      numMoves++;
    }
 
    else if (move.getMoveType() == Move::PROMOTION)
