@@ -217,12 +217,12 @@ void Board::assertBoard()
  *********************************************/
 bool Board::canMove(const Position& posPrev, const Position& posSelect)
 {
-   if (!posPrev.isValid() && !posSelect.isValid()) // if invalid
+   if (!posPrev.isValid() || !posSelect.isValid()) // if invalid
       return false;
 
    set <Move> possible;
-   int c = posSelect.getCol();
-   int r = posSelect.getRow();
+   int c = posPrev.getCol();
+   int r = posPrev.getRow();
 
    board[c][r]->getMoves(possible, *this); // getMoves changes possible
 

@@ -54,7 +54,7 @@ public:
    // setters
    virtual void free();
    virtual void reset(bool fFree = true);
-   bool Board::canMove(const Position& posPrev, const Position& posSelect);
+   bool canMove(const Position& posPrev, const Position& posSelect);
    virtual void move(Move & move);
    virtual Piece& operator [] (const Position& pos);
 
