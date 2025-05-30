@@ -21,11 +21,6 @@
 #include <cassert>
 using namespace std;
 
-
-#include <iostream>
-using namespace std;
-
-
 /***********************************************
  * BOARD : RESET
  *         Just fill the board with the known pieces
@@ -215,6 +210,34 @@ void Board::assertBoard()
 }
 
 
+/**********************************************
+ * BOARD : CAN MOVE
+ *         Execute a move according to the contained instructions
+ *   INPUT move The instructions of the move
+ *********************************************/
+bool Board::canMove(const Position& posPrev, const Position& posSelect)
+{
+   if (!posPrev.isValid() && !posSelect.isValid()) // if invalid
+      return false;
+
+   set <Move> possible;
+   int c = posSelect.getCol();
+   int r = posSelect.getRow();
+
+   board[c][r]->getMoves(possible, *this); // getMoves changes possible
+
+   Move newMove;
+   newMove.setSource(posPrev);
+   newMove.setDest(posSelect);
+   newMove.setMoveType(Move::MOVE);
+
+   if (possible.find(newMove) != possible.end())
+   {
+      move(newMove);
+      return true;
+   }
+   return false;
+}
 
 
 /**********************************************
@@ -222,7 +245,7 @@ void Board::assertBoard()
  *         Execute a move according to the contained instructions
  *   INPUT move The instructions of the move
  *********************************************/
-void Board::move(const Move& move)
+void Board::move(Move& move)
 {
    int destCol = move.getDest().getCol();
    int destRow = move.getDest().getRow();

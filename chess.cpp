@@ -38,15 +38,9 @@ void callBack(Interface *pUI, void * p)
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition());
 
    // move
-   if (pUI->getSelectPosition().isValid() && pUI->getPreviousPosition().isValid())
+   if (pBoard->canMove(pUI->getPreviousPosition(), pUI->getSelectPosition()))
    {
-      Move newMove;
-      newMove.setSource(pUI->getPreviousPosition());
-      newMove.setDest(pUI->getSelectPosition());
-      newMove.setMoveType(Move::MOVE);
-      pBoard->move(newMove);
       pUI->clearPreviousPosition();
-      pUI->clearSelectPosition();
    }
 }
 
