@@ -36,6 +36,8 @@ void callBack(Interface *pUI, void * p)
 
    // display board, pieces, and possible moves
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition());
+   Position prev = pUI->getPreviousPosition();
+   Position sel = pUI->getSelectPosition();
 
    // move
    if (pBoard->canMove(pUI->getPreviousPosition(), pUI->getSelectPosition()))
