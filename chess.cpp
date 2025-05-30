@@ -36,6 +36,18 @@ void callBack(Interface *pUI, void * p)
 
    // display board, pieces, and possible moves
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition());
+
+   // move
+   if (pUI->getSelectPosition().isValid() && pUI->getPreviousPosition().isValid())
+   {
+      Move newMove;
+      newMove.setSource(pUI->getPreviousPosition());
+      newMove.setDest(pUI->getSelectPosition());
+      newMove.setMoveType(Move::MOVE);
+      pBoard->move(newMove);
+      pUI->clearPreviousPosition();
+      pUI->clearSelectPosition();
+   }
 }
 
 

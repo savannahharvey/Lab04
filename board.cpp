@@ -239,11 +239,13 @@ void Board::move(const Move& move)
 
       // board at destination has the same piece as the source
       board[destCol][destRow] = board[srcCol][srcRow];
+      board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
 
       // new space object...
       Space* space = new Space(srcCol, srcRow);
       // board at source is a new space piece now
       board[srcCol][srcRow] = space;
+      numMoves++;
    }
 
    else if (move.getMoveType() == Move::PROMOTION)

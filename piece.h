@@ -93,6 +93,12 @@ public:
 
    // setter
    virtual void setLastMove(int currentMove) { lastMove = currentMove; nMoves++; }
+   virtual void movePeice(int col, int row, int currentMove) 
+   {
+      position.setCol(col); 
+      position.setRow(row); 
+      setLastMove(currentMove); 
+   }
 
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
