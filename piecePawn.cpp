@@ -131,7 +131,7 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       // check right capture
       if (posMove.isValid() &&
           board[Position(col - 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col - 1, row)].isWhite() == false &&  // if opposite color
+          board[Position(col - 1, row)].isWhite() == true &&  // if opposite color
           board[Position(col - 1, row)].getNMoves() == 1   )   // if only moved once
       {
          Move move;
@@ -147,7 +147,7 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       // check left capture
       if (posMove.isValid() &&
           board[Position(col + 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col + 1, row)].isWhite() == false &&  // if opposite color
+          board[Position(col + 1, row)].isWhite() == true &&  // if opposite color
           board[Position(col + 1, row)].getNMoves() == 1   )   // if only moved once
       {
          Move move;
