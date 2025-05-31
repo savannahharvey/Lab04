@@ -267,12 +267,9 @@ void Board::move(const Move& move)
    int destRow = move.getDest().getRow();
    int srcCol = move.getSource().getCol();
    int srcRow = move.getSource().getRow();
-
+   
    if (move.getMoveType() == Move::MOVE)
    {
-      // add to how many moves made
-      numMoves++;
-
       // get rid of what was at the new dest address
       delete board[destCol][destRow];
 
@@ -288,9 +285,6 @@ void Board::move(const Move& move)
 
    else if (move.getMoveType() == Move::PROMOTION)
    {
-      // add to how many moves made
-      numMoves += 1;
-
       // is White
       bool isW = board[srcCol][srcRow]->isWhite();
 
@@ -310,9 +304,6 @@ void Board::move(const Move& move)
 
    else if (move.getMoveType() == Move::ENPASSANT)
    {
-      // add to how many moves made
-      numMoves += 1;
-
       // get rid of what was at the new dest address
       delete board[destCol][destRow];
 
@@ -343,9 +334,6 @@ void Board::move(const Move& move)
 
    else if (move.getMoveType() == Move::CASTLE_KING)
    {
-      // add to how many moves made
-      numMoves += 1;
-
       if (board[srcCol][srcRow]->isWhite() == true) // if white
       {
          // get rid of what was at the new dest addresses
@@ -390,9 +378,6 @@ void Board::move(const Move& move)
 
    else if (move.getMoveType() == Move::CASTLE_QUEEN)
    {
-      // add to how many moves made
-      numMoves += 1;
-
       if (board[srcCol][srcRow]->isWhite() == true) // if white
       {
          // get rid of what was at the new dest addresses
@@ -433,7 +418,7 @@ void Board::move(const Move& move)
          board[0][7] = space2;
       }
    }
-   
+   numMoves++;
    assertBoard();
 }
 
