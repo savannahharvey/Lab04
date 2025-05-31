@@ -84,13 +84,15 @@ void Board::display(const Position & posHover, const Position & posSelect) const
       Piece* pPiece = board[c][r];
       if (pPiece)
       {
-         pPiece->getMoves(possible, *this); // getMoves changes possible
+         if ( (pPiece->isWhite() && numMoves % 2 == 0) || 
+            ( !pPiece->isWhite() && numMoves % 2 == 1) )
+            pPiece->getMoves(possible, *this); // getMoves changes possible
       }
    }
 
    set <Move> ::iterator it;
    for (it = possible.begin(); it != possible.end(); ++it)
-      // iterate through and display possible
+      // iterate through and display possible moves
       gout.drawPossible((*it).getDest());
 
    // draw the pieces
@@ -217,24 +219,30 @@ void Board::assertBoard()
  *********************************************/
 bool Board::canMove(const Position& posPrev, const Position& posSelect)
 {
+   int c = posPrev.getCol();
+   int r = posPrev.getRow();
+   
    if (!posPrev.isValid() || !posSelect.isValid()) // if invalid
+      return false;
+   
+   // check if whites turn or not
+   if (board[c][r]->isWhite() && numMoves % 2 == 1)
+      return false;
+   else if (!(board[c][r]->isWhite()) && numMoves % 2 == 0)
       return false;
 
    set <Move> possible;
-   int c = posPrev.getCol();
-   int r = posPrev.getRow();
 
    board[c][r]->getMoves(possible, *this); // getMoves changes possible
 
-   Move newMove;
-   newMove.setSource(posPrev);
-   newMove.setDest(posSelect);
-   newMove.setMoveType(Move::MOVE);
-
-   if (possible.find(newMove) != possible.end())
+   for (std::set<Move>::iterator it = possible.begin(); it != possible.end(); ++it)
    {
-      move(newMove);
-      return true;
+      if (it->getDest() == posSelect)
+      {
+         Move newMove = const_cast<Move&>(*it);
+         move(newMove);
+         return true;
+      }
    }
    return false;
 }
@@ -302,6 +310,8 @@ void Board::move(Move& move)
 
       // board at destination has the same piece as the source
       board[destCol][destRow] = board[srcCol][srcRow];
+      board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
+
 
       // new space object...
       Space* space = new Space(srcCol, srcRow);
@@ -337,6 +347,9 @@ void Board::move(Move& move)
          // move king and rook
          board[destCol][destRow] = board[srcCol][srcRow];
          board[5][0] = board[7][0];
+         board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
+         board[5][0]->movePeice(5, 0, getCurrentMove());
+
 
          // new space objects...
          Space* space = new Space(srcCol, srcRow);
@@ -354,6 +367,9 @@ void Board::move(Move& move)
          // move king and rook
          board[destCol][destRow] = board[srcCol][srcRow];
          board[5][7] = board[7][7];
+         board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
+         board[5][7]->movePeice(5, 7, getCurrentMove());
+
 
          // new space objects...
          Space* space = new Space(srcCol, srcRow);
@@ -378,6 +394,9 @@ void Board::move(Move& move)
          // move king and rook
          board[destCol][destRow] = board[srcCol][srcRow];
          board[3][0] = board[0][0];
+         board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
+         board[3][0]->movePeice(3, 0, getCurrentMove());
+
 
          // new space objects...
          Space* space = new Space(srcCol, srcRow);
@@ -395,6 +414,8 @@ void Board::move(Move& move)
          // move king and rook
          board[destCol][destRow] = board[srcCol][srcRow];
          board[3][7] = board[0][7];
+         board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
+         board[3][7]->movePeice(3, 7, getCurrentMove());
 
          // new space objects...
          Space* space = new Space(srcCol, srcRow);

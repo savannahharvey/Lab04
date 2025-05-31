@@ -25,6 +25,9 @@ Move::Move()
    this->source = Position();
    this->dest = Position();
    this->capture = INVALID;
+   this->moveType = MOVE;
+   this->promote = INVALID;
+   this->isWhite = true;
 }
 
 /***************************************************
