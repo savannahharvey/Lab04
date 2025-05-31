@@ -10,10 +10,7 @@
 #include "move.h"
 #include "pieceType.h"
 #include <cassert>
-#include <iostream>
 #include <sstream>
-
-using namespace std;
 
 
 /***************************************************

@@ -222,8 +222,8 @@ void Board::assertBoard()
 
 /**********************************************
  * BOARD : CAN MOVE
- *         Execute a move according to the contained instructions
- *   INPUT move The instructions of the move
+ *         Determine if a move is possible first
+ *   INPUT Previous Select and Select
  *********************************************/
 bool Board::canMove(const Position& posPrev, const Position& posSelect)
 {

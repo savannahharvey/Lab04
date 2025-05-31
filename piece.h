@@ -8,10 +8,6 @@
  *       SPACE, KING, QUEEN, ROOK, KNIGHT, BISHOP, PAWN
  ************************************************************************/
 
-#include <iostream>
-using namespace std;
-
-
 #pragma once
 
 #include <set>         // for SET to return a set of possible moves
