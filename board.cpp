@@ -208,7 +208,15 @@ void Board::free()
  *********************************************/
 void Board::assertBoard()
 {
-
+   for (int c = 0; c < 8; c++)
+   {
+      for (int r = 0; r < 8; r++)
+      {
+         Position posPeice = board[c][r]->getPosition();
+         assert(posPeice.getCol() == c);
+         assert(posPeice.getRow() == r);
+      }
+   }
 }
 
 
@@ -425,6 +433,8 @@ void Board::move(const Move& move)
          board[0][7] = space2;
       }
    }
+   
+   assertBoard();
 }
 
 
