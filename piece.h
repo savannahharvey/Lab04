@@ -89,7 +89,7 @@ public:
    virtual int  getNMoves()                const { return nMoves; }
    virtual void decrementNMoves()                {                      }
    virtual const Position & getPosition()  const { return position;   }
-   virtual bool justMoved(int currentMove) const { return lastMove + 1 == currentMove ? true : false; }
+   virtual bool justMoved(int currentMove) const { return (lastMove + 1) == currentMove; }
 
    // setter
    virtual void setLastMove(int currentMove) { lastMove = currentMove; nMoves++; }
@@ -254,7 +254,7 @@ public:
    int getNMoves() const     { return nMoves; }             // for enpassant test
    void getMoves(set <Move>& moves, const Board& board) const { }
    bool isMoved() const { return nMoves != 0 ? true : false; }
-   bool justMoved(int currentMove) const { return lastMove + 1 == currentMove; }
+   bool justMoved(int currentMove) const { return (lastMove + 1) == currentMove; }
 };
 
 class Black : public PieceDummy
@@ -268,7 +268,7 @@ public:
    int getNMoves() const     { return nMoves; }             // for enpassant test
    void getMoves(set <Move>& moves, const Board& board) const { }
    bool isMoved() const { return nMoves != 0 ? true : false; }
-   bool justMoved(int currentMove) const { return lastMove + 1 == currentMove; }
+   bool justMoved(int currentMove) const { return (lastMove + 1) == currentMove; }
 };
 
 

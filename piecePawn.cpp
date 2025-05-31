@@ -88,71 +88,24 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       move.setCapture(board[Position(posMove)].getType());
       moves.insert(move);
    }
+   
+   this->MoveEnpassant(moves, board);
+}
 
-   // Check for enpassant
-   if (fWhite)
+void Pawn::MoveEnpassant(set <Move> &moves, const Board& board) const
+{
+   const int cDelta[] = { 1, -1 };
+   for (int i = 0; i < 2; i++)
    {
-      posMove = Position(col + 1, row + 1);
-      // check right capture
+      Position posMove(position.getCol() + cDelta[i], position.getRow() + (fWhite ? 1 : -1) );
+      Position posKill(position.getCol() + cDelta[i], position.getRow());
       if (posMove.isValid() &&
-          board[Position(col + 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col + 1, row)].isWhite() == false &&  // if opposite color
-          board[Position(col + 1, row)].getNMoves() == 1   &&  // if only moved once
-          board[Position(col + 1, row)].justMoved(board.getCurrentMove())) // if just moved
-      {
-         Move move;
-         Position source(position);
-         move.setSource(source);
-         move.setDest(Position(posMove));
-         move.setCapture(PAWN);
-         move.setMoveType(Move::ENPASSANT);
-         moves.insert(move);
-      }
-
-      posMove = Position(col - 1, row + 1);
-      // check left capture
-      if (posMove.isValid() &&
-          board[Position(col - 1, row)].getType() == PAWN  &&  // if a pawn
-          board[Position(col - 1, row)].isWhite() == false &&  // if opposite color
-          board[Position(col - 1, row)].getNMoves() == 1   &&  // if only moved once
-          board[Position(col - 1, row)].justMoved(board.getCurrentMove())) // if just moved
-      {
-         Move move;
-         Position source(position);
-         move.setSource(source);
-         move.setDest(Position(col - 1, row + 1));
-         move.setCapture(PAWN);
-         move.setMoveType(Move::ENPASSANT);
-         moves.insert(move);
-      }
-   }
-   // Black side en-passant
-   else
-   {
-      posMove = Position(col - 1, row - 1);
-      // check right capture
-      if (posMove.isValid() &&
-          board[Position(col - 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col - 1, row)].isWhite() == true &&  // if opposite color
-          board[Position(col - 1, row)].getNMoves() == 1  &&   // if only moved once
-          board[Position(col - 1, row)].justMoved(board.getCurrentMove())) // if just moved
-      {
-         Move move;
-         Position source(position);
-         move.setSource(source);
-         move.setDest(Position(posMove));
-         move.setCapture(PAWN);
-         move.setMoveType(Move::ENPASSANT);
-         moves.insert(move);
-      }
-      
-      posMove = Position(col + 1, row - 1);
-      // check left capture
-      if (posMove.isValid() &&
-          board[Position(col + 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col + 1, row)].isWhite() == true &&   // if opposite color
-          board[Position(col + 1, row)].getNMoves() == 1  &&   // if only moved once
-          board[Position(col + 1, row)].justMoved(board.getCurrentMove())) // if just moved
+          position.getRow() == (fWhite ? 4 : 3) &&
+          board[posMove].getType() == SPACE &&
+          board[posKill].getType() == PAWN &&
+          board[posKill].justMoved(board.getCurrentMove()) &&
+          board[posKill].isWhite() != fWhite &&
+          board[posKill].getNMoves() == 1 )
       {
          Move move;
          Position source(position);

@@ -322,6 +322,7 @@ void TestPawn::getMoves_captureBlack()
 void TestPawn::getMoves_enpassantWhite()
 {  // SETUP
    BoardEmpty board;
+   board.moveNumber = 2;
    Pawn pawn(0, 0, false);
    pawn.fWhite = true;
    pawn.position.colRow = 0x14;
@@ -330,8 +331,10 @@ void TestPawn::getMoves_enpassantWhite()
    
    Black pawnL(PAWN);
    pawnL.nMoves = 1;
+   pawnL.lastMove = 1;
    Black pawnR(PAWN);
    pawnR.nMoves = 1;
+   pawnR.lastMove = 1;
 
    board.board[0][4] = &pawnL;
    board.board[2][4] = &pawnR;
@@ -382,21 +385,24 @@ void TestPawn::getMoves_enpassantWhite()
 void TestPawn::getMoves_enpassantBlack()
 {  // SETUP
    BoardEmpty board;
+   board.moveNumber = 2;
    Pawn pawn(0, 0, false);
    pawn.fWhite = false;
    pawn.position.colRow = 0x53;
    pawn.nMoves = 1;
    board.board[5][3] = &pawn;
    
-   Black pawnL(PAWN);
+   White pawnL(PAWN);
    pawnL.nMoves = 1;
-   Black pawnR(PAWN);
+   pawnL.lastMove = 1;
+   White pawnR(PAWN);
    pawnR.nMoves = 1;
+   pawnR.lastMove = 1;
 
    board.board[4][3] = &pawnL;
    board.board[6][3] = &pawnR;
 
-   Black P(PAWN);
+   White P(PAWN);
    board.board[5][2] = &P;
    
    set <Move> moves; // f4 can capture e4 and g4
