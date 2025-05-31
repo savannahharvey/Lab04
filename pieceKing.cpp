@@ -65,7 +65,7 @@ void King::getMoves(set <Move>& moves, const Board& board) const
             Position posCopy = getPosition(); // new source because it needs to be const
             move.setSource(posCopy);
             fWhite ? move.setDest(Position(2, 0)) : move.setDest(Position(2, 7));
-            move.setMoveType(Move::CASTLE_KING);
+            move.setMoveType(Move::CASTLE_QUEEN);
             moves.insert(move);
          }
       }

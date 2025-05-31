@@ -84,7 +84,7 @@ int WINAPI WinMain(
    _In_ PSTR pCmdLine,
    _In_ int nCmdShow)
 #else // !_WIN32
-int main(int argc, char** argv)
+int main(int __argc, char** __argv)
 #endif // !_WIN32
 {
 
@@ -98,8 +98,8 @@ int main(int argc, char** argv)
    ogstream* pgout = new ogstream;
    Board board(pgout);
    
-   if (argc == 2)
-      readFile(argv[1], board);
+   if (__argc == 2)
+      readFile(__argv[1], board);
 
    // set everything into action
    ui.run(callBack, (void *)(&board));      
