@@ -97,7 +97,8 @@ public:
    {
       position.setCol(col); 
       position.setRow(row); 
-      setLastMove(currentMove); 
+      setLastMove(currentMove);
+      nMoves++;
    }
 
    // overwritten by the various pieces
@@ -253,6 +254,7 @@ public:
    int getNMoves() const     { return nMoves; }             // for enpassant test
    void getMoves(set <Move>& moves, const Board& board) const { }
    bool isMoved() const { return nMoves != 0 ? true : false; }
+   bool justMoved(int currentMove) const { return lastMove + 1 == currentMove; }
 };
 
 class Black : public PieceDummy
@@ -266,6 +268,7 @@ public:
    int getNMoves() const     { return nMoves; }             // for enpassant test
    void getMoves(set <Move>& moves, const Board& board) const { }
    bool isMoved() const { return nMoves != 0 ? true : false; }
+   bool justMoved(int currentMove) const { return lastMove + 1 == currentMove; }
 };
 
 

@@ -97,7 +97,8 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       if (posMove.isValid() &&
           board[Position(col + 1, row)].getType() == PAWN &&   // if a pawn
           board[Position(col + 1, row)].isWhite() == false &&  // if opposite color
-          board[Position(col + 1, row)].getNMoves() == 1   )   // if only moved once
+          board[Position(col + 1, row)].getNMoves() == 1   &&  // if only moved once
+          board[Position(col + 1, row)].justMoved(board.getCurrentMove())) // if just moved
       {
          Move move;
          Position source(position);
@@ -111,9 +112,10 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       posMove = Position(col - 1, row + 1);
       // check left capture
       if (posMove.isValid() &&
-          board[Position(col - 1, row)].getType() == PAWN &&  // if a pawn
+          board[Position(col - 1, row)].getType() == PAWN  &&  // if a pawn
           board[Position(col - 1, row)].isWhite() == false &&  // if opposite color
-          board[Position(col - 1, row)].getNMoves() == 1   )  // if only moved once
+          board[Position(col - 1, row)].getNMoves() == 1   &&  // if only moved once
+          board[Position(col - 1, row)].justMoved(board.getCurrentMove())) // if just moved
       {
          Move move;
          Position source(position);
@@ -132,7 +134,8 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       if (posMove.isValid() &&
           board[Position(col - 1, row)].getType() == PAWN &&   // if a pawn
           board[Position(col - 1, row)].isWhite() == true &&  // if opposite color
-          board[Position(col - 1, row)].getNMoves() == 1   )   // if only moved once
+          board[Position(col - 1, row)].getNMoves() == 1  &&   // if only moved once
+          board[Position(col - 1, row)].justMoved(board.getCurrentMove())) // if just moved
       {
          Move move;
          Position source(position);
@@ -147,8 +150,9 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       // check left capture
       if (posMove.isValid() &&
           board[Position(col + 1, row)].getType() == PAWN &&   // if a pawn
-          board[Position(col + 1, row)].isWhite() == true &&  // if opposite color
-          board[Position(col + 1, row)].getNMoves() == 1   )   // if only moved once
+          board[Position(col + 1, row)].isWhite() == true &&   // if opposite color
+          board[Position(col + 1, row)].getNMoves() == 1  &&   // if only moved once
+          board[Position(col + 1, row)].justMoved(board.getCurrentMove())) // if just moved
       {
          Move move;
          Position source(position);

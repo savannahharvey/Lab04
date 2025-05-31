@@ -287,7 +287,7 @@ void Board::move(const Move& move)
       bool isW = board[srcCol][srcRow]->isWhite();
 
       // new queen object...
-      Queen* queen = new Queen(srcCol, srcRow, isW);
+      Queen* queen = new Queen(destCol, destRow, isW);
       // delete pawn
       delete board[srcCol][srcRow];
 
