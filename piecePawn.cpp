@@ -19,7 +19,10 @@ void Pawn::display(ogstream* pgout) const
    pgout->drawPawn(getPosition(), black);
 }
 
-
+/***************************************************
+* PIECE DRAW
+* Draw all the pieces.
+***************************************************/
 void Pawn::getMoves(set <Move>& moves, const Board& board) const
 {
    int col = position.getCol();
@@ -104,6 +107,11 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
    this->MoveEnpassant(moves, board);
 }
 
+
+/***************************************************
+* PIECE DRAW
+* Draw all the pieces.
+***************************************************/
 void Pawn::MoveEnpassant(set <Move> &moves, const Board& board) const
 {
    const int cDelta[] = { 1, -1 };
