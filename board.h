@@ -55,7 +55,7 @@ public:
    virtual void free();
    virtual void reset(bool fFree = true);
    bool canMove(const Position& posPrev, const Position& posSelect);
-   virtual void move(Move & move);
+   virtual void move(const Move & move);
    virtual Piece& operator [] (const Position& pos);
 
 protected:
