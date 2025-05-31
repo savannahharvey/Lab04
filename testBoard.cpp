@@ -226,7 +226,7 @@ void TestBoard::move_pawnPromotion()
    Board board(nullptr, true);
    board.numMoves = 0;
    board.board[0][6] = new PieceSpy(0, 6, true, PAWN);
-   board.board[0][2] = new PieceSpy(0, 2, false, SPACE);
+   board.board[0][7] = new PieceSpy(0, 7, false, SPACE);
    PieceSpy::reset();
 
    Move a7a8Q;
