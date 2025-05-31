@@ -39,7 +39,7 @@ public:
 
    // constructor
    Move();
-   Move(char* t) { this->parse(t); }
+   Move(const char* t) { this->parse(t); }
    
    // setters
    void setSource(Position &pos) { this->source = pos; }
@@ -48,6 +48,7 @@ public:
    void setDest(const Position &pos) { this->dest = pos; }
    void setCapture(PieceType capture) {this->capture = capture; this->moveType = MOVE; }
    void setMoveType(const MoveType type) { this->moveType = type; }
+   void parse(const char* t);
 
    // operators
    bool operator == (const Move& rhs) const {
@@ -68,7 +69,6 @@ public:
 
 
 private:
-   void parse(char* t);
    char* lettersFromPosition(Position& pos);
    char letterFromPieceType(PieceType pt)     const;
    PieceType pieceTypeFromLetter(char letter) const;

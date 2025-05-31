@@ -36,14 +36,40 @@ void callBack(Interface *pUI, void * p)
 
    // display board, pieces, and possible moves
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition());
-   Position prev = pUI->getPreviousPosition();
-   Position sel = pUI->getSelectPosition();
+//   Position prev = pUI->getPreviousPosition();
+//   Position sel = pUI->getSelectPosition();
 
    // move
    if (pBoard->canMove(pUI->getPreviousPosition(), pUI->getSelectPosition()))
    {
       pUI->clearPreviousPosition();
    }
+}
+
+
+/********************************************************
+ * READ FILE
+ * Read a file where moves are encoded in Smith notation
+ *******************************************************/
+void readFile(const char* fileName, Board board)
+{
+   // open the file
+   ifstream fin(fileName);
+   if (fin.fail())
+      return;
+
+   // read the file, one move at a time
+   string textMove;
+   bool valid = true;
+   while (valid && fin >> textMove)
+   {
+      Move move;
+      move.parse(textMove.c_str());
+      board.move(move);
+   }
+
+   // close and done
+   fin.close();
 }
 
 
@@ -71,6 +97,9 @@ int main(int argc, char** argv)
    // Initialize the game class
    ogstream* pgout = new ogstream;
    Board board(pgout);
+   
+   if (argc == 2)
+      readFile(argv[1], board);
 
    // set everything into action
    ui.run(callBack, (void *)(&board));      

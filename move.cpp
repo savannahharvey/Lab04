@@ -30,7 +30,7 @@ Move::Move()
 /***************************************************
  * MOVE : PARSE
  ***************************************************/
-void Move::parse(char* t)
+void Move::parse(const char* t)
 {
    // Convert char* to string and start the iterator.
    string text(t);
