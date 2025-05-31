@@ -19,7 +19,15 @@ void Pawn::display(ogstream* pgout) const
    pgout->drawPawn(getPosition(), black);
 }
 
-
+/***************************************************
+* PEICE GET MOVES
+* See what moves we can do as a pawn.
+* 1. we can move forward (If nothing is in our way)
+* 2. we can move 2 spots (If nothing is in our way and we havent moved yet.)
+* 3. We can capture. (up one and over one left or right, if it is on the board and an enemy peice.)
+* 4. We can EnPassant (Who made up this stupid rule?)
+* 5. we can promote (get to the other side and be the queen!)
+***************************************************/
 void Pawn::getMoves(set <Move>& moves, const Board& board) const
 {
    int col = position.getCol();
@@ -104,21 +112,30 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
    this->MoveEnpassant(moves, board);
 }
 
+
+/***************************************************
+* PAWN MOVES ENPASSANt
+* Handles logic for enpassant
+***************************************************/
 void Pawn::MoveEnpassant(set <Move> &moves, const Board& board) const
 {
+   // move right and left.
    const int cDelta[] = { 1, -1 };
+   // check both directions
    for (int i = 0; i < 2; i++)
    {
-      Position posMove(position.getCol() + cDelta[i], position.getRow() + (fWhite ? 1 : -1) );
-      Position posKill(position.getCol() + cDelta[i], position.getRow());
-      if (posMove.isValid() &&
-          position.getRow() == (fWhite ? 4 : 3) &&
-          board[posMove].getType() == SPACE &&
-          board[posKill].getType() == PAWN &&
-          board[posKill].justMoved(board.getCurrentMove()) &&
-          board[posKill].isWhite() != fWhite &&
-          board[posKill].getNMoves() == 1 )
+      Position posMove(position.getCol() + cDelta[i], position.getRow() + (fWhite ? 1 : -1) ); // where we go
+      Position posKill(position.getCol() + cDelta[i], position.getRow()); // what we take
+      
+      if (posMove.isValid() &&                                 // on the board
+          position.getRow() == (fWhite ? 4 : 3) &&             // correct row for color
+          board[posMove].getType() == SPACE &&                 // move into a space
+          board[posKill].getType() == PAWN &&                  // only can capture a pawn
+          board[posKill].isWhite() != fWhite &&                // only capture oposite color
+          board[posKill].justMoved(board.getCurrentMove()) &&  // see if it was the last peice moved
+          board[posKill].getNMoves() == 1 )                    // It can only move once!
       {
+         // add the move.
          Move move;
          Position source(position);
          move.setSource(source);
