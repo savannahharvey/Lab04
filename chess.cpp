@@ -51,7 +51,7 @@ void callBack(Interface *pUI, void * p)
  * READ FILE
  * Read a file where moves are encoded in Smith notation
  *******************************************************/
-void readFile(const char* fileName, Board board)
+void readFile(const char* fileName, Board& board)
 {
    // open the file
    ifstream fin(fileName);

@@ -424,7 +424,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EBBCFA92-4746-418A-A9A4-460C095C7646"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "board.cpp"
@@ -434,36 +434,38 @@
             endingLineNumber = "437"
             landmarkName = "Board::move(move)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EBBCFA92-4746-418A-A9A4-460C095C7646 - d7158f91067c6a24"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Board::move(Move const&amp;)"
-                  moduleName = "Lab04"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mckaylarman/Documents/CSE%20231/Lab04/board.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "437"
-                  endingLineNumber = "437">
-               </Location>
-               <Location
-                  uuid = "EBBCFA92-4746-418A-A9A4-460C095C7646 - d7158f91067c6a24"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Board::move(Move const&amp;)"
-                  moduleName = "Lab04"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mckaylarman/Documents/CSE%20231/Lab04/board.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "437"
-                  endingLineNumber = "437">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D07C2961-8FD3-4DE2-8020-6A9E675712CE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "chess.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "readFile(fileName, board)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC228FFF-0917-4D62-A84F-798C8DBA67F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "chess.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "readFile(fileName, board)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
