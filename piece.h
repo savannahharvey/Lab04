@@ -98,7 +98,6 @@ public:
       position.setCol(col); 
       position.setRow(row); 
       setLastMove(currentMove);
-//      nMoves++;
    }
 
    // overwritten by the various pieces

@@ -48,6 +48,7 @@ public:
    void setDest(const Position &pos) { this->dest = pos; }
    void setCapture(PieceType capture) {this->capture = capture; this->moveType = MOVE; }
    void setMoveType(const MoveType type) { this->moveType = type; }
+   void setPromote(const PieceType pt) { this->promote = pt; }
    void parse(const char* t);
 
    // operators

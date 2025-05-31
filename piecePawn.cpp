@@ -36,6 +36,12 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       Position source(position);
       move.setSource(source);
       move.setDest(posMove);
+      // Check for promotion
+      if (fWhite ? posMove.getRow() == 7 : posMove.getRow() == 0)
+      {
+         move.setMoveType(Move::PROMOTION);
+         move.setPromote(QUEEN);
+      }
       moves.insert(move);
       
       // Check Double move.
@@ -48,12 +54,6 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
          move.setSource(source);
          move.setDest(posMove);
          moves.insert(move);
-      }
-
-      // Check for promotion
-      if (fWhite ? row + 1 == 7 : row - 1 == 0)
-      {
-         move.setMoveType(Move::PROMOTION);
       }
    }
    
@@ -70,6 +70,12 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       move.setSource(source);
       move.setDest(Position(posMove));
       move.setCapture(board[Position(posMove)].getType());
+      // Check for promotion
+      if (fWhite ? posMove.getRow() == 7 : posMove.getRow() == 0)
+      {
+         move.setMoveType(Move::PROMOTION);
+         move.setPromote(QUEEN);
+      }
       moves.insert(move);
    }
    
@@ -86,6 +92,12 @@ void Pawn::getMoves(set <Move>& moves, const Board& board) const
       move.setSource(source);
       move.setDest(Position(posMove));
       move.setCapture(board[Position(posMove)].getType());
+      // Check for promotion
+      if (fWhite ? posMove.getRow() == 7 : posMove.getRow() == 0)
+      {
+         move.setMoveType(Move::PROMOTION);
+         move.setPromote(QUEEN);
+      }
       moves.insert(move);
    }
    
