@@ -253,7 +253,7 @@ bool Board::canMove(const Position& posPrev, const Position& posSelect)
  *         Execute a move according to the contained instructions
  *   INPUT move The instructions of the move
  *********************************************/
-void Board::move(Move& move)
+void Board::move(const Move& move)
 {
    int destCol = move.getDest().getCol();
    int destRow = move.getDest().getRow();
@@ -393,7 +393,7 @@ void Board::move(Move& move)
 
          // move king and rook
          board[destCol][destRow] = board[srcCol][srcRow];
-         board[3][0] = board[0][0];
+         board[3][0] = board[0][0]; // Move rook
          board[destCol][destRow]->movePeice(destCol, destRow, getCurrentMove());
          board[3][0]->movePeice(3, 0, getCurrentMove());
 
@@ -405,7 +405,7 @@ void Board::move(Move& move)
          board[srcCol][srcRow] = space;
          board[0][0] = space2;
       }
-      else
+      else // Black castle Queen
       {
          // get rid of what was at the new dest addresses
          delete board[3][7];
